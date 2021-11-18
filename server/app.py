@@ -66,6 +66,16 @@ def delete_song(id):
 
     return "Song deleted"
 
+# PUT route to update a song:
+@app.route('/<id>', methods=["PUT"])
+def update_song(id):
+    song = Song.query.get(id)
+
+    song.title = request.form.get('title')
+
+    db.session.commit()
+    return "Song updated"
+
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True)
