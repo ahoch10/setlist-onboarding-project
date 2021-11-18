@@ -23,7 +23,7 @@ class Song(db.Model):
 
 # GET route to get all songs
 @app.route('/', methods=["GET"])
-def home():
+def all_songs():
     try:
         songs = Song.query.all()
         results = [ {
@@ -57,6 +57,14 @@ def add_song():
     except Exception as e:
         return(str(e))
 
+# DELETE route to delete a song
+@app.route('/<id>', methods=["DELETE"])
+def delete_song(id):
+    song = Song.query.get(id)
+    db.session.delete(song)
+    db.session.commit()
+
+    return "Song deleted"
 
 if __name__ == '__main__':
     db.create_all()
