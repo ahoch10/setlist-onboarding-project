@@ -60,21 +60,29 @@ def add_song():
 # DELETE route to delete a song
 @app.route('/<id>', methods=["DELETE"])
 def delete_song(id):
-    song = Song.query.get(id)
-    db.session.delete(song)
-    db.session.commit()
+    try:
+        song = Song.query.get(id)
+        db.session.delete(song)
+        db.session.commit()
 
-    return "Song deleted"
+        return "Song deleted"
+    except Exception as e:
+        return (str(e))
 
 # PUT route to update a song:
 @app.route('/<id>', methods=["PUT"])
 def update_song(id):
-    song = Song.query.get(id)
+    try:
+        song = Song.query.get(id)
+        song.title = request.json.get('title', song.title)
+        song.key = request.json.get('key', song.key)
+        song.instrumentation = request.json.get('instrumentation', song.instrumentation)
+        song.notes = request.json.get('notes', song.notes)
 
-    song.title = request.form.get('title')
-
-    db.session.commit()
-    return "Song updated"
+        db.session.commit()
+        return "Song updated"
+    except Exception as e:
+        return (str(e))
 
 if __name__ == '__main__':
     db.create_all()
