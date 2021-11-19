@@ -22,7 +22,7 @@ class Song(db.Model):
         self.notes=notes
 
 # GET route to get all songs
-@app.route('/', methods=["GET"])
+@app.route('/songs', methods=["GET"])
 def all_songs():
     try:
         songs = Song.query.all()
@@ -38,7 +38,7 @@ def all_songs():
         return(str(e))
 
 # POST route to add a song
-@app.route('/', methods=["POST"])
+@app.route('/songs', methods=["POST"])
 def add_song():
     title=request.args.get('title')
     key=request.args.get('key')
@@ -58,7 +58,7 @@ def add_song():
         return(str(e))
 
 # DELETE route to delete a song
-@app.route('/<id>', methods=["DELETE"])
+@app.route('/songs/<id>', methods=["DELETE"])
 def delete_song(id):
     try:
         song = Song.query.get(id)
@@ -70,7 +70,7 @@ def delete_song(id):
         return (str(e))
 
 # PUT route to update a song:
-@app.route('/<id>', methods=["PUT"])
+@app.route('/songs/<id>', methods=["PUT"])
 def update_song(id):
     try:
         song = Song.query.get(id)
