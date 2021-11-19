@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import AddSong from "./AddSong"
 
 function App() {
 
@@ -18,18 +19,8 @@ function App() {
   return (
     <div>
       <h1>My Setlist</h1>
-      <form onSubmit={handleSubmit}>
-      <h3>Add a song</h3>
-        Title:<input type="text" name="title" />
-        <br />
-        Key: <input type="text" name="key" />
-        <br />
-        Instrumentation:<input type="text" name="instrumentation" />
-        <br />
-        Notes:<textarea type="text" name="notes" />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
+
+      <AddSong />
 
       <table>
         <tbody>
