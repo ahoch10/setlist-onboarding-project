@@ -48,7 +48,7 @@ def add_song():
         song=Song(
                 title=title,
                 key=key,
-                # instrumentation=instrumentation,
+                instrumentation=instrumentation,
                 notes=notes
         )
         db.session.add(song)
