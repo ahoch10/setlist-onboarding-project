@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+table {
+  margin: 10px;
+  border-collapse: collapse;
+}
+
+.table-row {
+  border-top: solid 5px darkpink;
+  outline: think solid darkpink;
+  border-radius: 15px;
+  background: pink;
+  margin: 10px;
+}
+
