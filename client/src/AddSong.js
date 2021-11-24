@@ -10,6 +10,19 @@ const AddSong = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(song);
+
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(song),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    fetch('/songs', options)
+        .then(res=>res.json())
+        .then(res=>console.log("res", res));
+
     setSong({ title: "", key: "", instrumentation: "", notes: "" });
   }
 

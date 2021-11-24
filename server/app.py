@@ -40,10 +40,16 @@ def all_songs():
 # POST route to add a song
 @app.route('/songs', methods=["POST"])
 def add_song():
-    title=request.args.get('title')
-    key=request.args.get('key')
-    instrumentation=request.args.get('instrumentation')
-    notes=request.args.get('notes')
+    song_data = request.get_json()
+
+    title = song_data.get("title")
+    key = song_data.get("key")
+    instrumentation = song_data.get("instrumentation")
+    notes = song_data.get("notes")
+    # title=request.args.get('title')
+    # key=request.args.get('key')
+    # instrumentation=request.args.get('instrumentation')
+    # notes=request.args.get('notes')
     try:
         song=Song(
                 title=title,
