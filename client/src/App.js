@@ -29,7 +29,7 @@ function App() {
           <th></th>
         </tr>
         {songs.map((song, i)=>{
-          return  <Song song={song} key={i} />
+          return  <Song song={song} key={i} songs={songs} setSongs={setSongs} />
         })}
         </tbody>
       </table>

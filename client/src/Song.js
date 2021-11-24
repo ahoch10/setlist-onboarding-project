@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-const Song = ({song}) => {
+const Song = ({song, songs, setSongs}) => {
 
   const [updateSong, setUpdateSong] = useState(false)
   const [updatedSong, setUpdatedSong] = useState({title: song.title, key: song.key, instrumentation: song.instrumenation, notes: song.notes});
@@ -15,6 +15,8 @@ const Song = ({song}) => {
     }
 
     fetch(`songs/${song.id}`, options)
+
+    setSongs(songs => songs.filter(s=> s.id !== song.id))
   }
 
   const handleUpdate = (event) => {
