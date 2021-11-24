@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 
-const Song = (props) => {
-  const song = props.song;
+const Song = ({song}) => {
 
   const [updateSong, setUpdateSong] = useState(false)
   const [updatedSong, setUpdatedSong] = useState({title: song.title, key: song.key, instrumentation: song.instrumenation, notes: song.notes});
@@ -38,7 +37,7 @@ const Song = (props) => {
   }
 
   if (updateSong) {
-    return (<tr key={song.id}>
+    return (<tr>
       <td><input type="input" name="title" placeholder={updatedSong.title} onChange={handleChange} /></td>
       <td><input type="input" name="key"placeholder={song.key} onChange={handleChange} /></td>
       <td><input type="input" name="instrumentation" splaceholder={song.instrumentation} onChange={handleChange} /></td>

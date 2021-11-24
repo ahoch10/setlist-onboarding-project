@@ -1,6 +1,6 @@
 import React , {useState} from 'react'
 
-const AddSong = () => {
+const AddSong = ({setSongs, songs}) => {
   const [song, setSong] = useState({title: "", key: "", instrumentation: "", notes: ""});
 
   const handleChange = (event) => {
@@ -22,6 +22,8 @@ const AddSong = () => {
     fetch('/songs', options)
         .then(res=>res.json())
         .then(res=>console.log("res", res));
+
+    setSongs([...songs, song])
 
     setSong({ title: "", key: "", instrumentation: "", notes: "" });
   }

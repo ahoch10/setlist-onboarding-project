@@ -16,7 +16,7 @@ function App() {
     <div>
       <h1>My Setlist</h1>
 
-      <AddSong />
+      <AddSong setSongs={setSongs} songs={songs} />
 
       <table>
         <tbody>
@@ -28,8 +28,8 @@ function App() {
           <th></th>
           <th></th>
         </tr>
-        {songs.map((song)=>{
-          return  <Song song={song} />
+        {songs.map((song, i)=>{
+          return  <Song song={song} key={i} />
         })}
         </tbody>
       </table>
