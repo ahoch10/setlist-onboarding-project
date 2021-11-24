@@ -46,10 +46,6 @@ def add_song():
     key = song_data.get("key")
     instrumentation = song_data.get("instrumentation")
     notes = song_data.get("notes")
-    # title=request.args.get('title')
-    # key=request.args.get('key')
-    # instrumentation=request.args.get('instrumentation')
-    # notes=request.args.get('notes')
     try:
         song=Song(
                 title=title,
@@ -80,10 +76,12 @@ def delete_song(id):
 def update_song(id):
     try:
         song = Song.query.get(id)
-        song.title = request.json.get('title', song.title)
-        song.key = request.json.get('key', song.key)
-        song.instrumentation = request.json.get('instrumentation', song.instrumentation)
-        song.notes = request.json.get('notes', song.notes)
+        song_data = request.get_json()
+
+        song.title = song_data.get('title', song.title)
+        song.key = song_data.get('key', song.key)
+        song.instrumentation = song_data.get('instrumentation', song.instrumentation)
+        song.notes = song_data.get('notes', song.notes)
 
         db.session.commit()
         return "Song updated"

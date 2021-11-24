@@ -1,7 +1,7 @@
 import React , {useState} from 'react'
 
 const AddSong = () => {
-  const [song, setSong] = useState ({ title: "", key: "", instrumentation: "", notes: "" });
+  const [song, setSong] = useState({title: "", key: "", instrumentation: "", notes: ""});
 
   const handleChange = (event) => {
     setSong({...song, [event.target.name]: event.target.value});

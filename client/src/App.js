@@ -26,6 +26,7 @@ function App() {
           <th>Instrumentation</th>
           <th>Notes</th>
           <th></th>
+          <th></th>
         </tr>
         {songs.map((song)=>{
           return  <Song song={song} />

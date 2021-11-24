@@ -1,10 +1,14 @@
 import React, {useState} from 'react'
 
 const Song = (props) => {
-  const [updateSong, setUpdateSong] = useState(false)
-  const [updatedSong, setUpdatedSong] = useState ({ title: "", key: "", instrumentation: "", notes: "" });
-
   const song = props.song;
+
+  const [updateSong, setUpdateSong] = useState(false)
+  const [updatedSong, setUpdatedSong] = useState({title: song.title, key: song.key, instrumentation: song.instrumenation, notes: song.notes});
+
+  const handleChange = (event) => {
+    setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});
+  }
 
   const handleDelete = (event) => {
     const options = {
@@ -15,20 +19,30 @@ const Song = (props) => {
   }
 
   const handleUpdate = (event) => {
+    event.preventDefault()
+
     const options = {
       method: 'PUT',
-      body: updatedSong
+      body: JSON.stringify(updatedSong),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
 
     fetch(`songs/${song.id}`, options)
+        .then(res=>res.json())
+        .then(res=>console.log("res", res))
+        .catch(err=> console.log("err", err));
+
+    setUpdateSong(false)
   }
 
   if (updateSong) {
-    return (<tr>
-      <td><input type="input" placeholder={song.title} /></td>
-      <td><input type="input" placeholder={song.key} /></td>
-      <td><input type="input" placeholder={song.instrumentation} /></td>
-      <td><input type="input" placeholder={song.notes} /></td>
+    return (<tr key={song.id}>
+      <td><input type="input" name="title" placeholder={updatedSong.title} onChange={handleChange} /></td>
+      <td><input type="input" name="key"placeholder={song.key} onChange={handleChange} /></td>
+      <td><input type="input" name="instrumentation" splaceholder={song.instrumentation} onChange={handleChange} /></td>
+      <td><input type="input" name="notes" placeholder={song.notes}  onChange={handleChange}/></td>
       <td><button type="button" onClick={handleDelete}>Delete</button></td>
       <td><button type="button" onClick={handleUpdate}>Update</button></td>
     </tr>)
