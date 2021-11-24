@@ -8,13 +8,8 @@ function App() {
   useEffect(()=> {
     fetch("/songs").then(
       res => res.json()).then(data => {
-      console.log("data", data)
       setSongs(data.songs)})
   }, []);
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-  }
 
   return (
     <div>
