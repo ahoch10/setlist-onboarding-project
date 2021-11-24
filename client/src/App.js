@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AddSong from "./AddSong"
+import Song from "./Song"
 
 function App() {
 
@@ -26,14 +27,8 @@ function App() {
           <th>Notes</th>
           <th></th>
         </tr>
-        {songs.map((song, i)=>{
-          return <tr key={i} className="table-row">
-              <td>{song.title}</td>
-              <td>{song.key}</td>
-              <td>{song.instrumentation}</td>
-              <td>{song.notes}</td>
-              <td>Delete</td>
-            </tr>
+        {songs.map((song)=>{
+          return  <Song song={song} />
         })}
         </tbody>
       </table>
