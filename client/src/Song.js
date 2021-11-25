@@ -36,13 +36,18 @@ const Song = ({song, songs, setSongs}) => {
         .catch(err=> console.log("err", err));
 
     setUpdateSong(false)
+
+    const songIndex = songs.findIndex(s=> song.id === s.id)
+    let updatedSongs = [...songs]
+    updatedSongs[songIndex] = updatedSong
+    setSongs(updatedSongs)
   }
 
   if (updateSong) {
     return (<tr>
       <td><input type="input" name="title" placeholder={updatedSong.title} onChange={handleChange} /></td>
       <td><input type="input" name="key"placeholder={song.key} onChange={handleChange} /></td>
-      <td><input type="input" name="instrumentation" splaceholder={song.instrumentation} onChange={handleChange} /></td>
+      <td><input type="input" name="instrumentation" placeholder={song.instrumentation} onChange={handleChange} /></td>
       <td><input type="input" name="notes" placeholder={song.notes}  onChange={handleChange}/></td>
       <td><button type="button" onClick={handleDelete}>Delete</button></td>
       <td><button type="button" onClick={handleUpdate}>Update</button></td>
