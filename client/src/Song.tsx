@@ -1,6 +1,12 @@
 import React, {useState} from 'react'
 
-const Song = ({song, songs, setSongs}) => {
+type SongProps = {
+  song: object;
+  songs: array;
+  setSongs: Function;
+}
+
+const Song: FC<SongProps> = ({song, songs, setSongs}) => {
 
   const [updateSong, setUpdateSong] = useState(false)
   const [updatedSong, setUpdatedSong] = useState({title: song.title, key: song.key, instrumentation: song.instrumenation, notes: song.notes});

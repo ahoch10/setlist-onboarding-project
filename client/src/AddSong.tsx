@@ -1,6 +1,11 @@
-import React , {useState} from 'react'
+import React , { FC, useState } from 'react'
 
-const AddSong = ({setSongs, songs}) => {
+type AddSongProps = {
+  songs: array;
+  setSongs: Function;
+}
+
+const AddSong: FC<AddSongProps> = ({setSongs, songs}) => {
   const [song, setSong] = useState({title: "", key: "", instrumentation: "", notes: ""});
 
   const handleChange = (event) => {

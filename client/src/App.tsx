@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import AddSong from "./AddSong"
 import Song from "./Song"
 
-const App: React.FC = () => {
+const App: FC = () => {
 
   const [songs, setSongs] = useState([]);
 
