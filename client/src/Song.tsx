@@ -1,15 +1,16 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { Song as SongInterface} from './types'
 
-type SongProps = {
-  song: object;
-  songs: array;
-  setSongs: Function;
+interface SongProps {
+  song: object,
+  songs: array,
+  setSongs: Function
 }
 
 const Song: FC<SongProps> = ({song, songs, setSongs}) => {
 
   const [updateSong, setUpdateSong] = useState(false)
-  const [updatedSong, setUpdatedSong] = useState({title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
+  const [updatedSong, setUpdatedSong] = useState<SongInterface>({title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
 
   const handleChange = (event) => {
     setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});

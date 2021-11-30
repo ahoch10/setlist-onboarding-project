@@ -1,12 +1,13 @@
 import React , { FC, useState } from 'react'
+import { Song } from './types'
 
-type AddSongProps = {
-  songs: array;
-  setSongs: Function;
+interface AddSongProps {
+  songs: array,
+  setSongs: Function
 }
 
 const AddSong: FC<AddSongProps> = ({setSongs, songs}) => {
-  const [song, setSong] = useState({title: "", key: "", instrumentation: "", notes: ""});
+  const [song, setSong] = useState<Song>({title: "", key: "", instrumentation: "", notes: ""});
 
   const handleChange = (event) => {
     setSong({...song, [event.target.name]: event.target.value});
@@ -29,8 +30,10 @@ const AddSong: FC<AddSongProps> = ({setSongs, songs}) => {
         .then(res=>console.log("res", res))
         .catch(err=> console.log("err", err));
 
+    //updates UI
     setSongs([...songs, song])
 
+    //resets form
     setSong({ title: "", key: "", instrumentation: "", notes: "" });
   }
 
