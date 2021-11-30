@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AddSong from "./AddSong"
 import Song from "./Song"
 
-function App() {
+const App: React.FC = () => {
 
   const [songs, setSongs] = useState([]);
 
