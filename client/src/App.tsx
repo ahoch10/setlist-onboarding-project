@@ -10,6 +10,7 @@ const App: FC = () => {
     fetch("/songs").then(
       res => res.json()).then(data => {
       setSongs(data.songs)})
+        .catch(err=> console.log("err", err));
   }, []);
 
   return (

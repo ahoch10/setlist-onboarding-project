@@ -9,7 +9,7 @@ type SongProps = {
 const Song: FC<SongProps> = ({song, songs, setSongs}) => {
 
   const [updateSong, setUpdateSong] = useState(false)
-  const [updatedSong, setUpdatedSong] = useState({title: song.title, key: song.key, instrumentation: song.instrumenation, notes: song.notes});
+  const [updatedSong, setUpdatedSong] = useState({title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
 
   const handleChange = (event) => {
     setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});
@@ -21,7 +21,9 @@ const Song: FC<SongProps> = ({song, songs, setSongs}) => {
     }
 
     fetch(`songs/${song.id}`, options)
+        .catch(err=> console.log("err", err));
 
+    //deletes song in the front end
     setSongs(songs => songs.filter(s=> s.id !== song.id))
   }
 
@@ -43,6 +45,7 @@ const Song: FC<SongProps> = ({song, songs, setSongs}) => {
 
     setUpdateSong(false)
 
+    //updates song in the front end optimistically
     const songIndex = songs.findIndex(s=> song.id === s.id)
     let updatedSongs = [...songs]
     updatedSongs[songIndex] = updatedSong

@@ -26,7 +26,8 @@ const AddSong: FC<AddSongProps> = ({setSongs, songs}) => {
 
     fetch('/songs', options)
         .then(res=>res.json())
-        .then(res=>console.log("res", res));
+        .then(res=>console.log("res", res))
+        .catch(err=> console.log("err", err));
 
     setSongs([...songs, song])
 
