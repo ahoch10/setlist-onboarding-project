@@ -39,16 +39,13 @@ const AddSong: FC<AddSongProps> = ({setSongs, songs}) => {
 
   return(
       <form onSubmit={handleSubmit}>
-      <h3>Add a song</h3>
-        Title:<input type="text" name="title" value={song.title} onChange={handleChange} />
-        <br />
-        Key: <input type="text" name="key"  value={song.key} onChange={handleChange} />
-        <br />
-        Instrumentation:<input type="text"  value={song.instrumentation} name="instrumentation" onChange={handleChange} />
-        <br />
-        Notes:<textarea type="text" name="notes" value={song.notes} onChange={handleChange} />
-        <br />
-        <input type="submit" value="Submit" />
+        <div className="table-row">
+          <div><input type="input" name="title" placeholder="Title" onChange={handleChange} /></div>
+          <div><input type="input" name="key" placeholder="Key" onChange={handleChange} /></div>
+          <div><input type="input" name="instrumentation" placeholder="Instrumentation" onChange={handleChange} /></div>
+          <div><input type="input" name="notes" placeholder="Notes"  onChange={handleChange}/></div>
+          <div><button  type="submit">Add Song</button></div>
+        </div>
       </form>
   )
 

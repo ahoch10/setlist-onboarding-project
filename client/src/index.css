@@ -34,6 +34,10 @@ font-weight: bold;
   background-color: darkgrey;
 }
 
+form > .table-row {
+  background-color: darkgrey;
+}
+
 .table-row {
   border: 5px solid darkpink;
   border-radius: 10px;

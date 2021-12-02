@@ -18,8 +18,6 @@ const App: FC = () => {
     <div>
       <h1>My Setlist</h1>
 
-      <AddSong setSongs={setSongs} songs={songs} />
-
       <div className="table">
         <div className="table-row headers">
           <div>Song</div>
@@ -27,12 +25,14 @@ const App: FC = () => {
           <div>Instrumentation</div>
           <div>Notes</div>
           <div></div>
-          <div></div>
+          <th></th>
         </div>
         {songs.map((song, i)=>{
           return  <Song song={song} key={i} songs={songs} setSongs={setSongs} />
         })}
+        <AddSong setSongs={setSongs} songs={songs} />
       </div>
+
     </div>
   );
 }
