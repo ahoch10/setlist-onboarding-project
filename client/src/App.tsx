@@ -1,10 +1,11 @@
 import React, { FC, useState, useEffect } from 'react'
 import AddSong from "./AddSong"
 import Song from "./Song"
+import { SongWithId } from './types'
 
 const App: FC = () => {
 
-  const [songs, setSongs] = useState([]);
+  const [songs, setSongs] = useState<SongWithId[]>([]);
 
   useEffect(()=> {
     fetch("/songs").then(

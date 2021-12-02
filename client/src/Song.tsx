@@ -9,7 +9,7 @@ interface SongProps {
 
 const Song: FC<SongProps> = ({song, songs, setSongs}) => {
 
-  const [updateSong, setUpdateSong] = useState(false)
+  const [updateSong, setUpdateSong] = useState<boolean>(false)
   const [updatedSong, setUpdatedSong] = useState<SongInterface>({title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
 
   const handleChange = (event) => {
@@ -47,8 +47,8 @@ const Song: FC<SongProps> = ({song, songs, setSongs}) => {
     setUpdateSong(false)
 
     //updates song in the front end optimistically
-    const songIndex = songs.findIndex(s=> song.id === s.id)
-    let updatedSongs = [...songs]
+    const songIndex: number = songs.findIndex(s=> song.id === s.id)
+    let updatedSongs: SongInterface[] = [...songs]
     updatedSongs[songIndex] = updatedSong
     setSongs(updatedSongs)
   }
