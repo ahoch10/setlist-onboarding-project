@@ -12,24 +12,33 @@ code {
     monospace;
 }
 
-table {
-  margin: 10px;
-  padding: 10px;
-  border-collapse: collapse;
-  border-radius: 15px;
+.table-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 70px 70px;
+  justify-content: space-around;
 }
 
-table tr:nth-child(even) {
+.headers {
+font-weight: bold;
+}
+
+.table > div:nth-child(even) {
   background: pink;
 }
 
-table tr:nth-child(odd) {
+.table > div:nth-child(odd) {
   background: lightgrey;
 }
 
-tr {
+.table > div:nth-child(1) {
+  background-color: darkgrey;
+}
+
+.table-row {
   border: 5px solid darkpink;
-  border-radius: 15px;
-  margin: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  width: 80%;
+  padding: 10px;
 }
 

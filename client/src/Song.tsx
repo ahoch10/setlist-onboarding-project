@@ -54,23 +54,23 @@ const Song: FC<SongProps> = ({song, songs, setSongs}) => {
   }
 
   if (updateSong) {
-    return (<tr>
-      <td><input type="input" name="title" placeholder={updatedSong.title} onChange={handleChange} /></td>
-      <td><input type="input" name="key"placeholder={song.key} onChange={handleChange} /></td>
-      <td><input type="input" name="instrumentation" placeholder={song.instrumentation} onChange={handleChange} /></td>
-      <td><input type="input" name="notes" placeholder={song.notes}  onChange={handleChange}/></td>
-      <td><button type="button" onClick={handleDelete}>Delete</button></td>
-      <td><button type="button" onClick={handleUpdate}>Update</button></td>
-    </tr>)
+    return (<div className="table-row">
+      <div><input type="input" name="title" placeholder={updatedSong.title} onChange={handleChange} /></div>
+      <div><input type="input" name="key"placeholder={song.key} onChange={handleChange} /></div>
+      <div><input type="input" name="instrumentation" placeholder={song.instrumentation} onChange={handleChange} /></div>
+      <div><input type="input" name="notes" placeholder={song.notes}  onChange={handleChange}/></div>
+      <div><button type="button" onClick={handleUpdate}>Update</button></div>
+      <div><button type="button" onClick={handleDelete}>Delete</button></div>
+    </div>)
   } else {
-  return (  <tr key={song.id} className="table-row">
-              <td>{song.title}</td>
-              <td>{song.key}</td>
-              <td>{song.instrumentation}</td>
-              <td>{song.notes}</td>
-              <td><button type="button" onClick={handleDelete}>Delete</button></td>
-              <td><button type="button" onClick={()=>setUpdateSong(true)}>Update</button></td>
-            </tr>
+  return (  <div key={song.id} className="table-row">
+              <div>{song.title}</div>
+              <div>{song.key}</div>
+              <div>{song.instrumentation}</div>
+              <div>{song.notes}</div>
+              <div><button type="button" onClick={()=>setUpdateSong(true)}>Update</button></div>
+              <div><button type="button" onClick={handleDelete}>Delete</button></div>
+            </div>
   ) }
 
 }

@@ -20,21 +20,19 @@ const App: FC = () => {
 
       <AddSong setSongs={setSongs} songs={songs} />
 
-      <table>
-        <tbody>
-        <tr className="table-row">
-          <th>Song</th>
-          <th>Key</th>
-          <th>Instrumentation</th>
-          <th>Notes</th>
-          <th></th>
-          <th></th>
-        </tr>
+      <div className="table">
+        <div className="table-row headers">
+          <div>Song</div>
+          <div>Key</div>
+          <div>Instrumentation</div>
+          <div>Notes</div>
+          <div></div>
+          <div></div>
+        </div>
         {songs.map((song, i)=>{
           return  <Song song={song} key={i} songs={songs} setSongs={setSongs} />
         })}
-        </tbody>
-      </table>
+      </div>
     </div>
   );
 }
