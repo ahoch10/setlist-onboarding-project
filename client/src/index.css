@@ -38,6 +38,10 @@ form > .table-row {
   background-color: darkgrey;
 }
 
+input [type=text] {
+  box-sizing: border-box;
+}
+
 .table-row {
   border: 5px solid darkpink;
   border-radius: 10px;
