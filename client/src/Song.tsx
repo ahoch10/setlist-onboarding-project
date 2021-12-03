@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Song as SongInterface} from './types'
+import { Draggable } from 'react-beautiful-dnd'
 
 interface SongProps {
   song: object,
@@ -7,7 +8,7 @@ interface SongProps {
   setSongs: Function
 }
 
-const Song: FC<SongProps> = ({song, songs, setSongs}) => {
+const Song: FC<SongProps> = ({song, songs, setSongs, index}) => {
 
   const [updateSong, setUpdateSong] = useState<boolean>(false)
   const [updatedSong, setUpdatedSong] = useState<SongInterface>({title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
@@ -63,14 +64,18 @@ const Song: FC<SongProps> = ({song, songs, setSongs}) => {
       <div><button type="button" onClick={handleDelete}>Delete</button></div>
     </div>)
   } else {
-  return (  <div key={song.id} className="table-row">
-              <div>{song.title}</div>
-              <div>{song.key}</div>
-              <div>{song.instrumentation}</div>
-              <div>{song.notes}</div>
-              <div><button type="button" onClick={()=>setUpdateSong(true)}>Update</button></div>
-              <div><button type="button" onClick={handleDelete}>Delete</button></div>
-            </div>
+  return (  <Draggable draggableId={song.title} index={index}>
+              {(provided) => (
+                <div key={song.id} className="table-row" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                  <div>{song.title}</div>
+                  <div>{song.key}</div>
+                  <div>{song.instrumentation}</div>
+                  <div>{song.notes}</div>
+                  <div><button type="button" onClick={()=>setUpdateSong(true)}>Update</button></div>
+                  <div><button type="button" onClick={handleDelete}>Delete</button></div>
+                </div>
+              )}
+            </Draggable>
   ) }
 
 }
