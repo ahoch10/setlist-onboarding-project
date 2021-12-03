@@ -10,12 +10,13 @@ export const isSong = (obj: any): obj is Song => {
 }
 
 export interface Song {
+  id: number,
   title: string,
   key: string,
   instrumentation: string,
   notes: string
 }
 
-export interface SongwithId extends Song {
+export interface SongWithId extends Song {
   id: number
 }

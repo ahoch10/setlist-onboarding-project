@@ -1,11 +1,11 @@
 import React, { FC, useState, useEffect } from 'react'
 import AddSong from "./AddSong"
 import Song from "./Song"
-import { SongWithId } from './types'
+import { Song as SongInterface} from './types'
 
 const App: FC = () => {
 
-  const [songs, setSongs] = useState<SongWithId[]>([]);
+  const [songs, setSongs] = useState<SongInterface[]>([]);
 
   useEffect(()=> {
     fetch("/songs").then(
@@ -25,7 +25,7 @@ const App: FC = () => {
           <div>Instrumentation</div>
           <div>Notes</div>
           <div></div>
-          <th></th>
+          <div></div>
         </div>
         {songs.map((song, i)=>{
           return  <Song song={song} key={i} songs={songs} setSongs={setSongs} />

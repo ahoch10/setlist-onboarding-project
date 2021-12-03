@@ -15,7 +15,6 @@ const AddSong: FC<AddSongProps> = ({setSongs, songs}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(song);
 
     const options = {
       method: 'POST',
