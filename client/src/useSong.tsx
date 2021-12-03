@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react'
 import { Song as SongInterface, SongWithId } from './types.tsx'
 
-function useSongs() {
-  const songs, setSongs = useState<SongWithId[]>([])
-  const song, setSong = useState<SongInterface>({ title: "", key: "", instrumentation: "", notes: "" })
+export const useSong = () => {
+  const [songs, setSongs] = useState<SongWithId[]>([])
+  const [songData, setSongData] = useState<SongInterface>({ title: "", key: "", instrumentation: "", notes: "" })
 
   const fetchSongs = () => {
     fetch("/songs").then(
@@ -55,6 +55,6 @@ function useSongs() {
     setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});
   }
 
+  return { songs, setSongs, songData, setSongData, fetchSongs, addSong, updateSong, deleteSong, handleChange }
 }
 
-export default useSong

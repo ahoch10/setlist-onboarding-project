@@ -10,7 +10,6 @@ export const isSong = (obj: any): obj is Song => {
 }
 
 export interface Song {
-  id: number,
   title: string,
   key: string,
   instrumentation: string,

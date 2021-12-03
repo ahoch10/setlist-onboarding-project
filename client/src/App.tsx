@@ -1,17 +1,19 @@
 import React, { FC, useState, useEffect } from 'react'
 import AddSong from "./AddSong"
 import Song from "./Song"
-import { Song as SongInterface} from './types'
+import { SongWithId } from './types'
+import { useSong } from './useSong'
 
 const App: FC = () => {
 
-  const [songs, setSongs] = useState<SongInterface[]>([]);
+  const {songs, setSongs, fetchSongs} = useSong();
 
   useEffect(()=> {
-    fetch("/songs").then(
-      res => res.json()).then(data => {
-      setSongs(data.songs)})
-        .catch(err=> console.log("err", err));
+    fetchSongs()
+    // fetch("/songs").then(
+    //   res => res.json()).then(data => {
+    //   setSongs(data.songs)})
+    //     .catch(err=> console.log("err", err));
   }, []);
 
   return (
