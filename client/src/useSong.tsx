@@ -1,14 +1,19 @@
-import { React, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Song as SongInterface, SongWithId } from './types.tsx'
 
-export const useSong = () => {
+export const useSong = (songId) => {
   const [songs, setSongs] = useState<SongWithId[]>([])
   const [songData, setSongData] = useState<SongInterface>({ title: "", key: "", instrumentation: "", notes: "" })
+
+  useEffect(()=> {
+    fetchSongs()
+  }, []);
 
   const fetchSongs = () => {
     fetch("/songs").then(
       res => res.json()).then(data => {
-      setSongs(data.songs)})
+        console.log("in fetch songs function...")
+        setSongs(data.songs)})
         .catch(err=> console.log("err", err));
   }
 
@@ -27,10 +32,10 @@ export const useSong = () => {
         .catch(err=> console.log("err", err));
   }
 
-  const updateSong = (song: songInterface) => {
+  const updateSong = (song: SongInterface) => {
     const options = {
       method: 'PUT',
-      body: JSON.stringify(updatedSong),
+      body: JSON.stringify(song),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -48,11 +53,18 @@ export const useSong = () => {
     }
 
     fetch(`songs/${songId}`, options)
+        .then(res=> {
+            console.log("res", res)
+            if (res.ok) {
+              console.log("fetching songs...")
+              fetchSongs()
+            }
+          })
         .catch(err=> console.log("err", err));
     }
 
   const handleChange = (event) => {
-    setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});
+    setSongData({...songData, [event.target.name]: event.target.value});
   }
 
   return { songs, setSongs, songData, setSongData, fetchSongs, addSong, updateSong, deleteSong, handleChange }

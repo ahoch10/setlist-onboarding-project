@@ -61,7 +61,7 @@ const Song: FC<SongProps> = ({song, songs}) => {
       <div><input type="input" name="instrumentation" placeholder={song.instrumentation} onChange={handleChange} /></div>
       <div><input type="input" name="notes" placeholder={song.notes}  onChange={handleChange}/></div>
       <div><button type="button" onClick={updateSong}>Update</button></div>
-      <div><button type="button" onClick={deleteSong}>Delete</button></div>
+      <div><button type="button" onClick={() => deleteSong(song.id)}>Delete</button></div>
     </div>)
   } else {
   return (  <div key={song.id} className="table-row">
@@ -70,7 +70,7 @@ const Song: FC<SongProps> = ({song, songs}) => {
               <div>{song.instrumentation}</div>
               <div>{song.notes}</div>
               <div><button type="button" onClick={()=>setUpdateSongForm(true)}>Update</button></div>
-              <div><button type="button" onClick={deleteSong}>Delete</button></div>
+              <div><button type="button" onClick={() => deleteSong(song.id)}>Delete</button></div>
             </div>
   ) }
 

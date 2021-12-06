@@ -6,15 +6,7 @@ import { useSong } from './useSong'
 
 const App: FC = () => {
 
-  const {songs, setSongs, fetchSongs} = useSong();
-
-  useEffect(()=> {
-    fetchSongs()
-    // fetch("/songs").then(
-    //   res => res.json()).then(data => {
-    //   setSongs(data.songs)})
-    //     .catch(err=> console.log("err", err));
-  }, []);
+  const {songs, setSongs} = useSong();
 
   return (
     <div>
