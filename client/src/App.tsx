@@ -1,19 +1,11 @@
-import React, { FC, useState, useEffect } from 'react';
-import AddSong from "./AddSong";
-import Song from "./Song";
-import { SongWithId } from './types';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import React, { FC } from 'react'
+import AddSong from "./AddSong"
+import Song from "./Song"
+import { useSong } from './useSong'
 
 const App: FC = () => {
 
-  const [songs, setSongs] = useState<SongWithId[]>([]);
-
-  useEffect(()=> {
-    fetch("/songs").then(
-      res => res.json()).then(data => {
-      setSongs(data.songs)})
-        .catch(err=> console.log("err", err));
-  }, []);
+  const {songs, setSongs, addSong, updateSong, deleteSong} = useSong();
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
@@ -29,28 +21,21 @@ const App: FC = () => {
   return (
     <div>
       <h1>My Setlist</h1>
-    <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="table">
-          <div className="table-row headers">
-            <div>Song</div>
-            <div>Key</div>
-            <div>Instrumentation</div>
-            <div>Notes</div>
-            <div></div>
-            <div></div>
-          </div>
-        <Droppable droppableId="songs">
-          {(provided) => (
-            <div className="songs" {...provided.droppableProps} ref={provided.innerRef}>
-              {songs.map((song, i)=>{
-                return <Song key={song.id} song={song} songs={songs} setSongs={setSongs} index={i}/>
-              })}
-              {provided.placeholder}
-            </div>)}
-        </Droppable>
-          <AddSong setSongs={setSongs} songs={songs} />
+      <div className="table">
+        <div className="table-row headers">
+          <div>Song</div>
+          <div>Key</div>
+          <div>Instrumentation</div>
+          <div>Notes</div>
+          <div></div>
+          <div></div>
         </div>
-    </DragDropContext>
+        {songs.map((song, i)=>{
+          return  <Song song={song} key={i} songs={songs} setSongs={setSongs} updateSong={updateSong} deleteSong={deleteSong} />
+        })}
+        <AddSong setSongs={setSongs} songs={songs} addSong={addSong}/>
+      </div>
+
     </div>
   );
 }

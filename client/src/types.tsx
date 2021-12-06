@@ -16,6 +16,6 @@ export interface Song {
   notes: string
 }
 
-export interface SongwithId extends Song {
+export interface SongWithId extends Song {
   id: number
 }
