@@ -12,7 +12,6 @@ export const useSong = (songId) => {
   const fetchSongs = () => {
     fetch("/songs").then(
       res => res.json()).then(data => {
-        console.log("in fetch songs function...")
         setSongs(data.songs)})
         .catch(err=> console.log("err", err));
   }
@@ -54,7 +53,6 @@ export const useSong = (songId) => {
 
     fetch(`songs/${songId}`, options)
         .then(res=> {
-            console.log("res", res)
             if (res.ok) {
               console.log("fetching songs...")
               fetchSongs()

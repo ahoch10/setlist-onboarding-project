@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Song as SongInterface} from './types'
+// import { Song as SongInterface} from './types'
 import { useSong } from './useSong'
 
 interface SongProps {
@@ -9,9 +9,9 @@ interface SongProps {
 }
 
 const Song: FC<SongProps> = ({song, songs}) => {
-  const {updateSong, songData, setSongs, handleChange, deleteSong} = useSong()
+  const {updateSong, songData, handleChange, deleteSong} = useSong()
   const [updateSongForm, setUpdateSongForm] = useState<boolean>(false)
-  const [updatedSong, setUpdatedSong] = useState<SongInterface>({title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
+  // const [updatedSong, setUpdatedSong] = useState<SongInterface>({title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
 
   // const handleChange = (event) => {
   //   setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});
@@ -29,38 +29,27 @@ const Song: FC<SongProps> = ({song, songs}) => {
   //  setSongs(songs => songs.filter(s=> s.id !== song.id))
   //}
 
-  //const handleUpdate = (event) => {
-  //  event.preventDefault()
+  const handleUpdate = (event) => {
+    // event.preventDefault()
+    console.log(songData)
+    updateSong(songData)
 
-  //  const options = {
-  //    method: 'PUT',
-  //    body: JSON.stringify(updatedSong),
-  //    headers: {
-  //      'Content-Type': 'application/json'
-  //    }
-  //  }
+    setUpdateSongForm(false)
 
-  //  fetch(`songs/${song.id}`, options)
-  //      .then(res=>res.json())
-  //      .then(res=>console.log("res", res))
-  //      .catch(err=> console.log("err", err));
-
-  //  setUpdateSongForm(false)
-
-  //  //updates song in the front end optimistically
-  //  const songIndex: number = songs.findIndex(s=> song.id === s.id)
-  //  let updatedSongs: SongInterface[] = [...songs]
-  //  updatedSongs[songIndex] = updatedSong
-  //  setSongs(updatedSongs)
-  //}
+    ////updates song in the front end optimistically
+    //const songIndex: number = songs.findIndex(s=> song.id === s.id)
+    //let updatedSongs: SongInterface[] = [...songs]
+    //updatedSongs[songIndex] = updatedSong
+    //setSongs(updatedSongs)
+  }
 
   if (updateSongForm) {
     return (<div className="table-row">
-      <div><input type="input" name="title" placeholder={updatedSong.title} onChange={handleChange} /></div>
+      <div><input type="input" name="title" placeholder={song.title} onChange={handleChange} /></div>
       <div><input type="input" name="key"placeholder={song.key} onChange={handleChange} /></div>
       <div><input type="input" name="instrumentation" placeholder={song.instrumentation} onChange={handleChange} /></div>
       <div><input type="input" name="notes" placeholder={song.notes}  onChange={handleChange}/></div>
-      <div><button type="button" onClick={updateSong}>Update</button></div>
+      <div><button type="button" onClick={handleUpdate}>Update</button></div>
       <div><button type="button" onClick={() => deleteSong(song.id)}>Delete</button></div>
     </div>)
   } else {
