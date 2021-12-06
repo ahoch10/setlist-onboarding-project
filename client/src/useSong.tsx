@@ -25,7 +25,6 @@ export const useSong = (songId) => {
     }
 
     fetch('/songs', options)
-        .then(res=>res.json())
         .then(res=>{
             if (res.ok) {
               fetchSongs()
