@@ -5,7 +5,7 @@ import { useSong } from './useSong'
 
 const App: FC = () => {
 
-  const {songs, setSongs} = useSong();
+  const {songs, setSongs, addSong, updateSong, deleteSong} = useSong();
 
   return (
     <div>
@@ -21,9 +21,9 @@ const App: FC = () => {
           <div></div>
         </div>
         {songs.map((song, i)=>{
-          return  <Song song={song} key={i} songs={songs} setSongs={setSongs} />
+          return  <Song song={song} key={i} songs={songs} setSongs={setSongs} updateSong={updateSong} deleteSong={deleteSong} />
         })}
-        <AddSong setSongs={setSongs} songs={songs} />
+        <AddSong setSongs={setSongs} songs={songs} addSong={addSong}/>
       </div>
 
     </div>

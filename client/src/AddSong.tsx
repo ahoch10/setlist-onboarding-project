@@ -30,7 +30,7 @@ const AddSong: FC<AddSongProps> = ({setSongs, songs}) => {
         .catch(err=> console.log("err", err));
 
     //updates UI
-    setSongs([...songs, song])
+    // setSongs([...songs, song])
 
     //resets form
     setSong({ title: "", key: "", instrumentation: "", notes: "" });

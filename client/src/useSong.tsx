@@ -3,7 +3,6 @@ import { Song as SongInterface, SongWithId } from './types.tsx'
 
 export const useSong = (songId) => {
   const [songs, setSongs] = useState<SongWithId[]>([])
-  const [songData, setSongData] = useState<SongInterface>({ title: "", key: "", instrumentation: "", notes: "" })
 
   useEffect(()=> {
     fetchSongs()
@@ -27,11 +26,15 @@ export const useSong = (songId) => {
 
     fetch('/songs', options)
         .then(res=>res.json())
-        .then(res=>console.log("res", res))
+        .then(res=>{
+            if (res.ok) {
+              fetchSongs()
+              }
+            })
         .catch(err=> console.log("err", err));
   }
 
-  const updateSong = (song: SongInterface) => {
+  const updateSong = (song: SongWithId) => {
     const options = {
       method: 'PUT',
       body: JSON.stringify(song),
@@ -41,8 +44,11 @@ export const useSong = (songId) => {
     }
 
     fetch(`songs/${song.id}`, options)
-        .then(res=>res.json())
-        .then(res=>console.log("res", res))
+        .then(res=>{
+            if (res.ok) {
+              fetchSongs()
+              }
+            })
         .catch(err=> console.log("err", err));
   }
 
@@ -54,17 +60,13 @@ export const useSong = (songId) => {
     fetch(`songs/${songId}`, options)
         .then(res=> {
             if (res.ok) {
-              console.log("fetching songs...")
               fetchSongs()
             }
           })
         .catch(err=> console.log("err", err));
     }
 
-  const handleChange = (event) => {
-    setSongData({...songData, [event.target.name]: event.target.value});
-  }
 
-  return { songs, setSongs, songData, setSongData, fetchSongs, addSong, updateSong, deleteSong, handleChange }
+  return { songs, addSong, updateSong, deleteSong }
 }
 

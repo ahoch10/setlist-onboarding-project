@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-// import { Song as SongInterface} from './types'
-import { useSong } from './useSong'
+import { Song as SongInterface} from './types'
 
 interface SongProps {
   song: object,
@@ -8,14 +7,13 @@ interface SongProps {
   setSongs: Function
 }
 
-const Song: FC<SongProps> = ({song, songs}) => {
-  const {updateSong, songData, handleChange, deleteSong} = useSong()
+const Song: FC<SongProps> = ({song, songs, updateSong, deleteSong}) => {
   const [updateSongForm, setUpdateSongForm] = useState<boolean>(false)
-  // const [updatedSong, setUpdatedSong] = useState<SongInterface>({title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
+  const [updatedSong, setUpdatedSong] = useState<SongInterface>({id: song.id, title: song.title, key: song.key, instrumentation: song.instrumentation, notes: song.notes});
 
-  // const handleChange = (event) => {
-  //   setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});
-  // }
+  const handleChange = (event) => {
+    setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});
+  }
 
   //const handleDelete = (event) => {
   //  const options = {
@@ -30,9 +28,8 @@ const Song: FC<SongProps> = ({song, songs}) => {
   //}
 
   const handleUpdate = (event) => {
-    // event.preventDefault()
-    console.log(songData)
-    updateSong(songData)
+    event.preventDefault()
+    updateSong(updatedSong)
 
     setUpdateSongForm(false)
 
