@@ -15,29 +15,10 @@ const Song: FC<SongProps> = ({song, songs, updateSong, deleteSong}) => {
     setUpdatedSong({...updatedSong, [event.target.name]: event.target.value});
   }
 
-  //const handleDelete = (event) => {
-  //  const options = {
-  //    method: 'DELETE'
-  //  }
-
-  //  fetch(`songs/${song.id}`, options)
-  //      .catch(err=> console.log("err", err));
-
-  //  //deletes song in the front end
-  //  setSongs(songs => songs.filter(s=> s.id !== song.id))
-  //}
-
   const handleUpdate = (event) => {
     event.preventDefault()
     updateSong(updatedSong)
-
     setUpdateSongForm(false)
-
-    ////updates song in the front end optimistically
-    //const songIndex: number = songs.findIndex(s=> song.id === s.id)
-    //let updatedSongs: SongInterface[] = [...songs]
-    //updatedSongs[songIndex] = updatedSong
-    //setSongs(updatedSongs)
   }
 
   if (updateSongForm) {
