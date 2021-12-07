@@ -16,13 +16,14 @@ class Song(db.Model):
     key = db.Column(db.String(10))
     instrumentation = db.Column(db.Text)
     notes = db.Column(db.Text)
-    # order_index = db.Column(db.Integer)
+    order_index = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, title, key, instrumentation, notes):
+    def __init__(self, title, key, instrumentation, notes, order_index):
         self.title=title
         self.key=key
         self.instrumentation=instrumentation
         self.notes=notes
+        self.order_index=order_index
 
 # GET route to get all songs
 @app.route('/songs', methods=["GET"])
@@ -34,7 +35,8 @@ def all_songs():
             "title": song.title,
             "instrumentation": song.instrumentation,
             "key": song.key,
-            "notes": song.notes
+            "notes": song.notes,
+            "order_index": song.order_index
         } for song in songs]
         return jsonify({"songs": results})
     except Exception as e:
@@ -49,12 +51,22 @@ def add_song():
     key = song_data.get("key")
     instrumentation = song_data.get("instrumentation")
     notes = song_data.get("notes")
+
     try:
+        songs = Song.query.all()
+
+        print("songs", songs)
+        if len(songs) == 0:
+            order_index = 1
+        else:
+            order_index = max([x.order_index for x in songs]) + 1
+
         song=Song(
                 title=title,
                 key=key,
                 instrumentation=instrumentation,
-                notes=notes
+                notes=notes,
+                order_index=order_index
         )
         db.session.add(song)
         db.session.commit()
