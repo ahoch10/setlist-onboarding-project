@@ -18,4 +18,5 @@ export interface Song {
 
 export interface SongWithId extends Song {
   id: number
+  order_index: number
 }
