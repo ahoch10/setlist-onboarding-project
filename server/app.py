@@ -29,7 +29,7 @@ class Song(db.Model):
 @app.route('/songs', methods=["GET"])
 def all_songs():
     try:
-        songs = Song.query.all()
+        songs = Song.query.order_by(Song.order_index).all()
         results = [ {
             "id": song.id,
             "title": song.title,
