@@ -32,7 +32,7 @@ const Song: FC<SongProps> = ({song, songs, updateSong, deleteSong, index}) => {
       <div><button type="button" onClick={() => deleteSong(song.id)}>Delete</button></div>
     </div>)
   } else {
-  return (<Draggable draggableId={String(song.id)} index={index}>
+  return (<Draggable draggableId={String(index)} index={index}>
             {provided =>  (
               <div key={song.id} className="table-row" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                 <div>{song.title}</div>
