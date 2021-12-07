@@ -14,6 +14,7 @@ class Song(db.Model):
     key = db.Column(db.String(10))
     instrumentation = db.Column(db.Text)
     notes = db.Column(db.Text)
+    # order_index = db.Column(db.Integer)
 
     def __init__(self, title, key, instrumentation, notes):
         self.title=title
@@ -89,5 +90,4 @@ def update_song(id):
         return (str(e))
 
 if __name__ == '__main__':
-    db.create_all()
     app.run(debug=True)
