@@ -22,11 +22,11 @@ code {
 font-weight: bold;
 }
 
-.song > div:nth-child(even) {
+.songs > div:nth-child(even) {
   background: pink;
 }
 
-.song > div:nth-child(odd) {
+.songs > div:nth-child(odd) {
   background: lightgrey;
 }
 

@@ -15,7 +15,7 @@ export const useSong = (songId) => {
         .catch(err=> console.log("err", err));
   }
 
-  const addSong = (song: SongInterface) => {
+  const addSong = (song:SongInterface) => {
     const options = {
       method: 'POST',
       body: JSON.stringify(song),
@@ -33,7 +33,7 @@ export const useSong = (songId) => {
         .catch(err=> console.log("err", err));
   }
 
-  const updateSong = (song: SongWithId) => {
+  const updateSong = (song:SongWithId) => {
     const options = {
       method: 'PUT',
       body: JSON.stringify(song),
@@ -66,6 +66,6 @@ export const useSong = (songId) => {
     }
 
 
-  return { songs, addSong, updateSong, deleteSong }
+  return { songs, setSongs, addSong, updateSong, deleteSong }
 }
 
