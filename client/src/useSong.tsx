@@ -51,7 +51,7 @@ export const useSong = (songId) => {
         .catch(err=> console.log("err", err));
   }
 
-  const deleteSong = (songId) => {
+  const deleteSong = (songId:number) => {
     const options = {
       method: 'DELETE'
     }
@@ -65,7 +65,24 @@ export const useSong = (songId) => {
         .catch(err=> console.log("err", err));
     }
 
+  const reorderSongs = (songs:SongWithId[]) => {
+    const options = {
+      method: 'PUT',
+      body: JSON.stringify(song),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
 
-  return { songs, setSongs, addSong, updateSong, deleteSong }
+    fetch('/songs', options)
+      .then(res=> {
+        if (res.ok) {
+          fetchSongs()}
+        })
+      .catch(err=> console.log("err", err))
+  }
+
+
+  return { songs, setSongs, addSong, updateSong, deleteSong, reorderSongs }
 }
 
