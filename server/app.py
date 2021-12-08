@@ -18,29 +18,24 @@ class Song(db.Model):
     notes = db.Column(db.Text)
     order_index = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, title, key, instrumentation, notes, order_index):
-        self.title=title
-        self.key=key
-        self.instrumentation=instrumentation
-        self.notes=notes
-        self.order_index=order_index
+def handle_bad_request(e):
+    return str(e), 400
+
+app.register_error_handler(400, handle_bad_request)
 
 # GET route to get all songs
 @app.route('/songs', methods=["GET"])
 def all_songs():
-    try:
-        songs = Song.query.order_by(Song.order_index).all()
-        results = [ {
-            "id": song.id,
-            "title": song.title,
-            "instrumentation": song.instrumentation,
-            "key": song.key,
-            "notes": song.notes,
-            "order_index": song.order_index
-        } for song in songs]
-        return jsonify({"songs": results})
-    except Exception as e:
-        return(str(e))
+    songs = Song.query.order_by(Song.order_index).all()
+    results = [ {
+        "id": song.id,
+        "title": song.title,
+        "instrumentation": song.instrumentation,
+        "key": song.key,
+        "notes": song.notes,
+        "order_index": song.order_index
+    } for song in songs]
+    return jsonify({"songs": results})
 
 # POST route to add a song
 @app.route('/songs', methods=["POST"])
@@ -52,73 +47,60 @@ def add_song():
     instrumentation = song_data.get("instrumentation")
     notes = song_data.get("notes")
 
-    try:
-        songs = Song.query.all()
+    songs = Song.query.all()
 
-        if len(songs) == 0:
-            order_index = 1
-        else:
-            order_index = max([x.order_index for x in songs]) + 1
+    if len(songs) == 0:
+        order_index = 1
+    else:
+        order_index = max([x.order_index for x in songs]) + 1
 
-        song=Song(
-                title=title,
-                key=key,
-                instrumentation=instrumentation,
-                notes=notes,
-                order_index=order_index
-        )
-        db.session.add(song)
-        db.session.commit()
-        return "Song added"
-    except Exception as e:
-        return(str(e))
+    song=Song(
+            title=title,
+            key=key,
+            instrumentation=instrumentation,
+            notes=notes,
+            order_index=order_index
+    )
+    db.session.add(song)
+    db.session.commit()
+    return "Song added"
 
 # DELETE route to delete a song
-@app.route('/songs/<id>', methods=["DELETE"])
-def delete_song(id):
-    try:
-        song = Song.query.get(id)
-        db.session.delete(song)
-        db.session.commit()
+@app.route('/songs/<int:id>', methods=["DELETE"])
+def delete_song(id:int):
+    song = Song.query.get(id)
+    db.session.delete(song)
+    db.session.commit()
 
-        return "Song deleted"
-    except Exception as e:
-        return (str(e))
+    return "Song deleted"
 
 # PUT route to update a song:
-@app.route('/songs/<id>', methods=["PUT"])
-def update_song(id):
-    try:
-        song = Song.query.get(id)
-        song_data = request.get_json()
+@app.route('/songs/<int:id>', methods=["PUT"])
+def update_song(id:int):
+    song = Song.query.get(id)
+    song_data = request.get_json()
 
-        song.title = song_data.get('title', song.title)
-        song.key = song_data.get('key', song.key)
-        song.instrumentation = song_data.get('instrumentation', song.instrumentation)
-        song.notes = song_data.get('notes', song.notes)
+    song.title = song_data.get('title', song.title)
+    song.key = song_data.get('key', song.key)
+    song.instrumentation = song_data.get('instrumentation', song.instrumentation)
+    song.notes = song_data.get('notes', song.notes)
 
-        db.session.commit()
-        return "Song updated"
-    except Exception as e:
-        return (str(e))
+    db.session.commit()
+    return "Song updated"
 
 #PUT route to update order of songs:
 @app.route('/songs', methods=["PUT"])
 def update_song_order():
-    try:
-        songs = Song.query.all()
-        updated_songs = request.get_json()
-        for song in updated_songs:
-            # find corresponding dictionary in songs by id
-            matching_song = [s for s in songs if s.id == song["id"]]
-            # update the current song with the order_index from updated_songs
-            matching_song[0].order_index = song["order_index"]
+    songs = Song.query.all()
+    updated_songs = request.get_json()
+    for song in updated_songs:
+        # find corresponding dictionary in songs by id
+        matching_song = [s for s in songs if s.id == song["id"]]
+        # update the current song with the order_index from updated_songs
+        matching_song[0].order_index = song["order_index"]
 
-        db.session.commit()
-        return "Song order updated"
-    except Exception as e:
-        return (str(e))
-
+    db.session.commit()
+    return "Song order updated"
 
 if __name__ == '__main__':
     app.run(debug=True)
