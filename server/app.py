@@ -108,7 +108,6 @@ def update_song_order():
     try:
         songs = Song.query.all()
         updated_songs = request.get_json()
-        print(updated_songs)
         for song in updated_songs:
             # find corresponding dictionary in songs by id
             matching_song = [s for s in songs if s.id == song["id"]]
