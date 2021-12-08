@@ -55,7 +55,6 @@ def add_song():
     try:
         songs = Song.query.all()
 
-        print("songs", songs)
         if len(songs) == 0:
             order_index = 1
         else:
@@ -102,6 +101,25 @@ def update_song(id):
         return "Song updated"
     except Exception as e:
         return (str(e))
+
+#PUT route to update order of songs:
+@app.route('/songs', methods=["PUT"])
+def update_song_order():
+    try:
+        songs = Song.query.all()
+        updated_songs = request.get_json()
+
+        for song in updated_songs["songs"]:
+            # find corresponding dictionary in updated_songs by id
+            matching_song = [s for s in songs if s.id == song["id"]]
+            # update the current song with the order_index from updated_songs
+            matching_song[0].order_index = song["order_index"]
+
+        db.session.commit()
+        return "Song order updated"
+    except Exception as e:
+        return (str(e))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
