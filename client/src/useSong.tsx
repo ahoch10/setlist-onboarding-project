@@ -68,7 +68,7 @@ export const useSong = (songId) => {
   const reorderSongs = (songs:SongWithId[]) => {
     const options = {
       method: 'PUT',
-      body: JSON.stringify(song),
+      body: JSON.stringify(songs),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -76,8 +76,7 @@ export const useSong = (songId) => {
 
     fetch('/songs', options)
       .then(res=> {
-        if (res.ok) {
-          fetchSongs()}
+        console.log(res)
         })
       .catch(err=> console.log("err", err))
   }

@@ -108,9 +108,9 @@ def update_song_order():
     try:
         songs = Song.query.all()
         updated_songs = request.get_json()
-
-        for song in updated_songs["songs"]:
-            # find corresponding dictionary in updated_songs by id
+        print(updated_songs)
+        for song in updated_songs:
+            # find corresponding dictionary in songs by id
             matching_song = [s for s in songs if s.id == song["id"]]
             # update the current song with the order_index from updated_songs
             matching_song[0].order_index = song["order_index"]

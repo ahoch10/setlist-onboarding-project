@@ -7,7 +7,7 @@ import { SongWithId } from './types'
 
 const App: FC = () => {
 
-  const {songs, setSongs, addSong, updateSong, deleteSong} = useSong();
+  const {songs, setSongs, addSong, updateSong, deleteSong, reorderSongs} = useSong();
 
   const handleDragEnd = (result) => {
     if (!result.destination) return;
@@ -15,6 +15,13 @@ const App: FC = () => {
     const [reorderedSong]:SongWithId = updatedSongs.splice(result.source.index, 1);
     updatedSongs.splice(result.destination.index, 0, reorderedSong);
     setSongs(updatedSongs)
+
+    const reorderedSongs:SongWithId[] = updatedSongs.map((song, index) => {
+      song.order_index = index
+      return song
+    })
+
+    reorderSongs(reorderedSongs)
   }
 
   return (
