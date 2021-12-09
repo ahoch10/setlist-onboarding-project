@@ -1,41 +1,11 @@
-from flask import Flask, render_template, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-import spotify
+from flask import Flask, request, jsonify, Blueprint
+from app.models.Song import Song
+from app.extensions import db
 
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost:5432/setlist"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-class Song(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    key = db.Column(db.String(10))
-    instrumentation = db.Column(db.Text)
-    notes = db.Column(db.Text)
-    order_index = db.Column(db.Integer, nullable=False)
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(300), nullable=False)
-    access_token = db.Column(db.Text, nullable=False)
-    token_type = db.Column(db.String(20), nullable=False)
-    expires_at = db.Column(db.Integer, nullable=False)
-    refresh_token = db.Column(db.Text, nullable=False)
-
-
-def handle_bad_request(e):
-    return str(e), 400
-
-app.register_error_handler(400, handle_bad_request)
+songs = Blueprint("songs", __name__)
 
 # GET route to get all songs
-@app.route('/songs', methods=["GET"])
+@songs.route('/songs', methods=["GET"])
 def all_songs():
     songs = Song.query.order_by(Song.order_index).all()
     results = [ {
@@ -49,7 +19,7 @@ def all_songs():
     return jsonify({"songs": results})
 
 # POST route to add a song
-@app.route('/songs', methods=["POST"])
+@songs.route('/songs', methods=["POST"])
 def add_song():
     song_data = request.get_json()
 
@@ -77,7 +47,7 @@ def add_song():
     return "Song added"
 
 # DELETE route to delete a song
-@app.route('/songs/<int:id>', methods=["DELETE"])
+@songs.route('/songs/<int:id>', methods=["DELETE"])
 def delete_song(id:int):
     song = Song.query.get(id)
     db.session.delete(song)
@@ -86,7 +56,7 @@ def delete_song(id:int):
     return "Song deleted"
 
 # PUT route to update a song:
-@app.route('/songs/<int:id>', methods=["PUT"])
+@songs.route('/songs/<int:id>', methods=["PUT"])
 def update_song(id:int):
     song = Song.query.get(id)
     song_data = request.get_json()
@@ -100,7 +70,7 @@ def update_song(id:int):
     return "Song updated"
 
 #PUT route to update order of songs:
-@app.route('/songs', methods=["PUT"])
+@songs.route('/songs', methods=["PUT"])
 def update_song_order():
     songs = Song.query.all()
     updated_songs = request.get_json()
@@ -113,5 +83,3 @@ def update_song_order():
     db.session.commit()
     return "Song order updated"
 
-if __name__ == '__main__':
-    app.run(debug=True)

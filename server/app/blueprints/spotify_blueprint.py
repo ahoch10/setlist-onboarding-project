@@ -1,13 +1,12 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from flask import Flask, url_for, session, request, redirect
+from flask import Flask, url_for, session, request, Blueprint, redirect
 import json
 import time
 from dotenv import load_dotenv
 import os
-# from app import User
 
-app = Flask(__name__)
+spotify = Blueprint("spotify", __name__)
 
 load_dotenv()
 
@@ -16,13 +15,13 @@ SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 scope = "playlist-modify-public user-read-email"
 redirect_uri = "http://localhost:5000/home"
 
-@app.route('/login')
+@spotify.route('/login')
 def login():
     sp_oauth=create_spotify_oauth()
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
 
-@app.route('/home')
+@spotify.route('/home')
 def home():
     #create spotify oauth object
     sp_oauth = create_spotify_oauth()
