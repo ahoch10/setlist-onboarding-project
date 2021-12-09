@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import spotify
 
 app = Flask(__name__)
 
@@ -17,6 +18,16 @@ class Song(db.Model):
     instrumentation = db.Column(db.Text)
     notes = db.Column(db.Text)
     order_index = db.Column(db.Integer, nullable=False)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(300), nullable=False)
+    access_token = db.Column(db.Text, nullable=False)
+    token_type = db.Column(db.String(20), nullable=False)
+    expires_at = db.Column(db.Integer, nullable=False)
+    refresh_token = db.Column(db.Text, nullable=False)
+
 
 def handle_bad_request(e):
     return str(e), 400
