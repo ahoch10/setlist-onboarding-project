@@ -6,6 +6,7 @@ import time
 from dotenv import load_dotenv
 import os
 from app.models.User import User
+from app.extensions import db
 
 spotify = Blueprint("spotify", __name__)
 
@@ -41,6 +42,12 @@ def callback():
     print(user_info)
 
     #put user info in database
+    user = User(
+            name=user_info["display_name"],
+            email=user_info["email"]
+            )
+    db.session.add(user)
+    db.session.commit()
 
     return 'home page'
 
