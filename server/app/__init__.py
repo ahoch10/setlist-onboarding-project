@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, jsonify
 from app.extensions import db, migrate
 from app.blueprints.songs_blueprint import songs
 from app.blueprints.spotify_blueprint import spotify
+from app.models.Song import Song
+from app.models.User import User
 
 def create_app():
 
