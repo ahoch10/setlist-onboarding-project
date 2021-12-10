@@ -4,6 +4,12 @@ from app.blueprints.songs_blueprint import songs
 from app.blueprints.spotify_blueprint import spotify
 from app.models.Song import Song
 from app.models.User import User
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+secret_key = os.getenv("APP_SECRET_KEY")
 
 def create_app():
 
@@ -11,6 +17,9 @@ def create_app():
 
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost:5432/setlist"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    app.secret_key = secret_key
+    app.config['SESSION_COOKIE_NAME'] ="cookie"
 
     db.init_app(app)
     migrate.init_app(app, db)

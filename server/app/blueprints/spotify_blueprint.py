@@ -5,6 +5,7 @@ import json
 import time
 from dotenv import load_dotenv
 import os
+from app.models.User import User
 
 spotify = Blueprint("spotify", __name__)
 
@@ -13,7 +14,7 @@ load_dotenv()
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 scope = "playlist-modify-public user-read-email"
-redirect_uri = "http://localhost:5000/home"
+redirect_uri = "http://localhost:5000/callback"
 
 @spotify.route('/login')
 def login():
@@ -21,8 +22,8 @@ def login():
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
 
-@spotify.route('/home')
-def home():
+@spotify.route('/callback')
+def callback():
     #create spotify oauth object
     sp_oauth = create_spotify_oauth()
     #get access code from URL
@@ -30,12 +31,16 @@ def home():
     #get token info from spotify using code
     token_info = sp_oauth.get_access_token(code)
 
+    print(token_info)
+    #add token to session
+    session["TOKEN_INFO"] = token_info
+
     #get user email
     sp = spotipy.Spotify(auth=token_info["access_token"])
     user_info = sp.current_user()
     print(user_info)
 
-    #put user info & token info in database
+    #put user info in database
 
     return 'home page'
 
@@ -47,7 +52,6 @@ def create_spotify_oauth():
             scope=scope)
 
 def get_token():
-    #first get user and check if there is token info
     pass
 
 if __name__ == '__main__':
