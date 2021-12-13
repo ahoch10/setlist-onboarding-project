@@ -7,3 +7,4 @@ class Song(db.Model):
     instrumentation = db.Column(db.Text)
     notes = db.Column(db.Text)
     order_index = db.Column(db.Integer)
+    setlist_id = db.Column(db.Integer, db.ForeignKey('setlist.id'), nullable=False)
