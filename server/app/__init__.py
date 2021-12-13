@@ -4,6 +4,7 @@ from app.blueprints.songs_blueprint import songs
 from app.blueprints.spotify_blueprint import spotify
 from app.models.Song import Song
 from app.models.User import User
+from app.models.Setlist import Setlist
 from dotenv import load_dotenv
 import os
 
