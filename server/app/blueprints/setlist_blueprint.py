@@ -28,6 +28,14 @@ def all_setlists(user:User):
     ]
     return jsonify({"setlists": results})
 
+#GET route for a single setlist's songs
+@requires_login
+@setlists.route("/setlists/<int:id>/songs", methods=["GET"])
+def single_setlist_songs(user:User, id:int):
+    setlist = Setlist.query.filter_by(id=id)
+    songs = [ song.to_json() for song in setlist.songs ]
+    return jsonify({"songs": songs})
+
 
 # POST route to add a setlist
 @requires_login
