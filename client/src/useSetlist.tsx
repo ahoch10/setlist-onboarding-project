@@ -65,6 +65,6 @@ export const useSong = (songId) => {
         .catch(err=> console.log("err", err));
     }
 
-  return { setlists, setSetlists, addSetlist, updateSetlist, deleteSong }
+  return { setlists, setSetlists, addSetlist, updateSetlist, deleteSetlist }
 }
 
