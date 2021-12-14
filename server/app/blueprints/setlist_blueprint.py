@@ -20,7 +20,7 @@ def requires_login(func):
 # GET route to get all setlists
 @requires_login
 @setlists.route("/setlists", methods=["GET"])
-def all_setlists():
+def all_setlists(user:User):
     setlists = Setlist.query.all()
     results = [
         setlist.to_json() for setlist in setlists
@@ -59,7 +59,7 @@ def delete_setlist(user:User, id: int):
 # PUT route to update a setlist
 @requires_login
 @setlists.route("/setlists/<int:id>")
-def update_setlist(id: int):
+def update_setlist(user:User, id: int):
     setlist = Setlist.query.get(id)
     setlist_data = request.get_json()
 
