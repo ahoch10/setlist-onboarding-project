@@ -8,15 +8,7 @@ songs = Blueprint("songs", __name__)
 @songs.route('/songs', methods=["GET"])
 def all_songs():
     songs = Song.query.order_by(Song.order_index).all()
-    results = [ {
-        "id": song.id,
-        "title": song.title,
-        "instrumentation": song.instrumentation,
-        "key": song.key,
-        "notes": song.notes,
-        "order_index": song.order_index,
-        "setlist_id": song.setlist_id
-    } for song in songs]
+    results = [ song.to_json() for song in songs]
     return jsonify({"songs": results})
 
 # POST route to add a song
