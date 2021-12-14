@@ -6,3 +6,13 @@ class Setlist(db.Model):
     date = db.Column(db.String(50))
     songs = db.relationship('Song', backref='setlist', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def to_json(self):
+       return  {
+            "id": self.id,
+            "title": self.title,
+            "date": self.date,
+            "songs": [song.to_json() for song in self.songs],
+            "user_id": self.user_id,
+        }
+
