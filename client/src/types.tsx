@@ -17,6 +17,17 @@ export interface Song {
 }
 
 export interface SongWithId extends Song {
-  id: number
-  order_index: number
+  id: number,
+  order_index: number,
+  setlist_id: number
+}
+
+export interface SetlistInterface {
+  title: string,
+  date: string
+}
+
+export interface SetlistWithId {
+  id: number,
+  user_id: number
 }
