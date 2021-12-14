@@ -7,6 +7,7 @@ songs = Blueprint("songs", __name__)
 # GET route to get all songs
 @songs.route('/songs', methods=["GET"])
 def all_songs():
+    print("get songs function")
     songs = Song.query.order_by(Song.order_index).all()
     results = [ {
         "id": song.id,

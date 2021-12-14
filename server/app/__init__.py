@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from app.extensions import db, migrate
 from app.blueprints.songs_blueprint import songs
 from app.blueprints.spotify_blueprint import spotify
+from app.blueprints.setlist_blueprint import setlists
 from app.models.Song import Song
 from app.models.User import User
 from app.models.Setlist import Setlist
@@ -16,7 +17,7 @@ def create_app():
 
     app = Flask(__name__)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost:5432/setlist"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost:5433/setlist"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     app.secret_key = secret_key
@@ -27,6 +28,7 @@ def create_app():
 
     app.register_blueprint(spotify)
     app.register_blueprint(songs)
+    app.register_blueprint(setlists)
 
     app.register_error_handler(400, handle_bad_request)
 
