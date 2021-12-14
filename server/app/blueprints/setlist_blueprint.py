@@ -28,7 +28,8 @@ def add_setlist():
 
     setlist = Setlist(
             title=title,
-            date=date
+            date=date,
+            user_id=user_id
     )
     db.session.add(setlist)
     db.session.commit()
