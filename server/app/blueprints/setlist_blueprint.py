@@ -6,6 +6,7 @@ from app.extensions import db
 
 setlists = Blueprint("setlists", __name__)
 
+#decorator requiring login
 def requires_login(func):
     def wrapper(*args, **kwargs):
         user_email = session.get("user_email")

@@ -32,14 +32,15 @@ def callback():
     #get token info from spotify using code
     token_info = sp_oauth.get_access_token(code)
 
-    print(token_info)
     #add token to session
     session["TOKEN_INFO"] = token_info
 
-    #get user email
+    #get user info
     sp = spotipy.Spotify(auth=token_info["access_token"])
     user_info = sp.current_user()
-    print(user_info)
+
+    #put user email in session
+    session["email"] = user_info["user_email"]
 
     #put user info in database
     user = User(
