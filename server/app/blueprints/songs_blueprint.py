@@ -15,7 +15,8 @@ def all_songs():
         "instrumentation": song.instrumentation,
         "key": song.key,
         "notes": song.notes,
-        "order_index": song.order_index
+        "order_index": song.order_index,
+        "setlist_id": song.setlist_id
     } for song in songs]
     return jsonify({"songs": results})
 
@@ -28,6 +29,7 @@ def add_song():
     key = song_data.get("key")
     instrumentation = song_data.get("instrumentation")
     notes = song_data.get("notes")
+    setlist_id = song_data.get("setlist_id")
 
     songs = Song.query.all()
 
@@ -41,7 +43,8 @@ def add_song():
             key=key,
             instrumentation=instrumentation,
             notes=notes,
-            order_index=order_index
+            order_index=order_index,
+            setlist_id=setlist_id
     )
     db.session.add(song)
     db.session.commit()
@@ -66,6 +69,7 @@ def update_song(id:int):
     song.key = song_data.get('key', song.key)
     song.instrumentation = song_data.get('instrumentation', song.instrumentation)
     song.notes = song_data.get('notes', song.notes)
+    song.setlist_id = song_data.get('setlist_id', song.setlist_id)
 
     db.session.commit()
     return "Song updated"
