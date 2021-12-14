@@ -1,6 +1,6 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from flask import Flask, url_for, session, request, Blueprint, redirect
+from flask import Flask, url_for, session, request, Blueprint, redirect, jsonify
 import json
 import time
 from dotenv import load_dotenv
@@ -50,6 +50,17 @@ def callback():
     db.session.commit()
 
     return 'home page'
+
+@spotify.route('/users', methods=["GET"])
+def all_users():
+    users = User.query.all()
+    results = [{
+        "id": user.id,
+        "name": user.name,
+        "email": user.email
+    } for user in users]
+
+    return jsonify({"users": results})
 
 def create_spotify_oauth():
     return SpotifyOAuth(

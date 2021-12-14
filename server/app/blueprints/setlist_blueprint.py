@@ -15,7 +15,7 @@ def all_setlists():
         "songs": setlist.songs,
         "user_id": setlist.user_id
     } for setlist in setlists]
-    return jsonify({"setlists": setlists})
+    return jsonify({"setlists": results})
 
 # POST route to add a setlist
 @setlists.route('/setlists', methods=["POST"])
