@@ -19,6 +19,7 @@ const AddSetlist: FC = ({setSetlists, setlists, addSetlist}) => {
       <div className="table-row">
           <div><input type="input" name="title" placeholder="Title" onChange={handleChange} value={setlist.title} /></div>
           <div><input type="input" name="date" placeholder="Date" onChange={handleChange} value={setlist.key} /></div>
+          <div><button  type="submit">Add Setlist</button></div>
       </div>
     </form>
   )
