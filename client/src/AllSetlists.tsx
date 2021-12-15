@@ -4,6 +4,7 @@ import SingleSetlist from './SingleSetlist'
 import AddSetlist from './AddSetlist'
 
 const AllSetlists: FC = () => {
+
   const { setlists, setSetlists, addSetlist, updateSetlist, deleteSetlist} =
     useSetlist()
 
@@ -14,8 +15,6 @@ const AllSetlists: FC = () => {
           <div className="table-row headers">
             <div>Setlist</div>
             <div>Date</div>
-            <div></div>
-            <div></div>
           </div>
                 {setlists.map((setlist, i) => {
                   return (
@@ -24,10 +23,11 @@ const AllSetlists: FC = () => {
                       key={i}
                       setlists={setlists}
                       setSetlists={setSetlists}
-                      updateSetlists={updateSetlists}
-                      deleteSetlists={deleteSetlists}
-                    />)}
+                      updateSetlist={updateSetlist}
+                      deleteSetlist={deleteSetlist}
+                     />)})}
           <AddSetlist setSetlists={setSetlists} setlists={setlists} addSetlist={addSetlist} />
+    </div>
     </div>
   )
 }
