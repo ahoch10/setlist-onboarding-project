@@ -30,7 +30,7 @@ const SingleSetlist: FC = ({setlist, setlists, updateSetlist, deleteSetlist}) =>
         <div>{setlist.title}</div>
         <div>{setlist.date}</div>
         <div><button type="button" onClick={()=>setUpdateSetlistForm(true)}>Update</button></div>
-        <div><button type="button" onClick={() => deleteSong(setlist.id)}>Delete</button></div>
+        <div><button type="button" onClick={() => deleteSetlist(setlist.id)}>Delete</button></div>
       </div>
     )
   }
