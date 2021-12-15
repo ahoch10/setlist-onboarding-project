@@ -1,19 +1,25 @@
 import React, { FC, useState, useEffect } from 'react'
 import AllSetlists from './AllSetlists'
 
+type Status = "loading" | "logged-in" | "not-logged-in"
+
 const App: FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [status, setStatus] = useState<Status>("loading")
 
   useEffect(()=> {
     fetch('/isloggedin').then(res=> res.json()).then(data => {
       if (data["user_email"]) {
-        setIsLoggedIn(true)
+        setStatus("logged-in")
+        }
+      else {
+        setStatus("not-logged-in")
       }
-    })
-  })
+    }).catch(()=>setStatus("not-logged-in"))
+  }, [])
 
-  if (isLoggedIn) return (<AllSetlists />)
-  else return (
+  if (status === "loading") return "Loading..."
+  if (status === "logged-in") return (<AllSetlists />)
+  return (
     <div>
     <h1 className="welcome">Welcome</h1>
     <a href="http://localhost:5000/login">Login with Spotify</a>
