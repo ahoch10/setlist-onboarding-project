@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from app.extensions import db, migrate
 from app.blueprints.songs_blueprint import songs
 from app.blueprints.spotify_blueprint import spotify
@@ -16,6 +17,8 @@ secret_key = os.getenv("APP_SECRET_KEY")
 def create_app():
 
     app = Flask(__name__)
+
+    CORS(app)
 
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost:5433/setlist"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

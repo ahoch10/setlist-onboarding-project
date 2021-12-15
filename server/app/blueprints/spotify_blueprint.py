@@ -40,7 +40,7 @@ def callback():
     user_info = sp.current_user()
 
     #put user email in session
-    session["email"] = user_info["user_email"]
+    session["user_email"] = user_info["email"]
 
     #put user info in database
     user = User(

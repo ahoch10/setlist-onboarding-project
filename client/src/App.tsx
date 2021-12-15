@@ -3,7 +3,10 @@ import React, { FC } from 'react'
 const App: FC = () => {
 
   const handleLogin = () => {
-    fetch("/login")
+    fetch("/login", {
+    credentials: 'omit',
+    headers: {'Access-Control-Allow-Origin': '*'}
+    })
   }
 
   return (
