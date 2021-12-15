@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { SetlistInterface, SetlistWithId } from './types.tsx'
 
-export const useSong = (songId) => {
+export const useSetlist = () => {
   const [setlists, setSetlists] = useState<SetlistWithId[]>([])
 
   useEffect(()=> {

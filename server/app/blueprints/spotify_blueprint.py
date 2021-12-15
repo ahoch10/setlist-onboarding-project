@@ -50,7 +50,13 @@ def callback():
     db.session.add(user)
     db.session.commit()
 
-    return 'home page'
+    return redirect("http://localhost:3000")
+
+@spotify.route('/isloggedin')
+def is_logged_in():
+    if session['user_email']:
+        return jsonify({"user_email": session["user_email"]})
+    return "Not logged in"
 
 @spotify.route('/users', methods=["GET"])
 def all_users():

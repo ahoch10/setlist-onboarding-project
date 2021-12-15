@@ -18,7 +18,7 @@ def create_app():
 
     app = Flask(__name__)
 
-    CORS(app)
+    CORS(app, origins=["http://localhost:3000"])
 
     app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost:5433/setlist"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

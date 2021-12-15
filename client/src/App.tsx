@@ -1,18 +1,22 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
+import AllSetlists from './AllSetlists'
 
 const App: FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const handleLogin = () => {
-    fetch("/login", {
-    credentials: 'omit',
-    headers: {'Access-Control-Allow-Origin': '*'}
+  useEffect(()=> {
+    fetch('/isloggedin').then(res=> res.json()).then(data => {
+      if (data["user_email"]) {
+        setIsLoggedIn(true)
+      }
     })
-  }
+  })
 
-  return (
+  if (isLoggedIn) return (<AllSetlists />)
+  else return (
     <div>
     <h1 className="welcome">Welcome</h1>
-    <button type="button" onClick={handleLogin}>Login with Spotify</button>
+    <a href="http://localhost:5000/login">Login with Spotify</a>
     </div>
   )
 
