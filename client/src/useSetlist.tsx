@@ -42,7 +42,7 @@ export const useSetlist = () => {
       }
     }
 
-    fetch(`setlist/${setlist.id}`, options)
+    fetch(`setlists/${setlist.id}`, options)
         .then(res=>{
             if (res.ok) {
               fetchSetlists()
