@@ -41,6 +41,7 @@ def callback():
 
     #put user email in session
     session["user_email"] = user_info["email"]
+    session["name"] = user_info["display_name"]
 
     #put user info in database
     check_user = User.query.filter_by(email = user_info["email"]).one_or_none()
@@ -55,10 +56,10 @@ def callback():
 
     return redirect("http://localhost:3000")
 
-@spotify.route('/isloggedin')
+@spotify.route('/user_info')
 def is_logged_in():
     if session.get("user_email"):
-        return jsonify({"user_email": session["user_email"]})
+        return jsonify({"user_email": session["user_email"], "name": session["name"]})
     return "Not logged in"
 
 @spotify.route('/users', methods=["GET"])

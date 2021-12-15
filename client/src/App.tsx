@@ -7,7 +7,7 @@ const App: FC = () => {
   const [status, setStatus] = useState<Status>("loading")
 
   useEffect(()=> {
-    fetch('/isloggedin').then(res=> res.json()).then(data => {
+    fetch('/user_info').then(res=> res.json()).then(data => {
       if (data["user_email"]) {
         setStatus("logged-in")
         }
