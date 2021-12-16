@@ -33,7 +33,7 @@ def all_setlists(user:User):
 @setlists.route("/setlists/<int:id>/songs", methods=["GET"])
 @requires_login
 def single_setlist_songs(user:User, id:int):
-    setlist = Setlist.query.filter_by(id=id)
+    setlist = Setlist.query.filter_by(id=id).first()
     songs = [ song.to_json() for song in setlist.songs ]
     return jsonify({"songs": songs})
 
