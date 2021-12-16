@@ -5,9 +5,9 @@ import { useSong } from './useSong'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { SongWithId } from './types'
 
-const Setlist: FC = () => {
+const Setlist: FC = ({id}) => {
   const { songs, setSongs, addSong, updateSong, deleteSong, reorderSongs } =
-    useSong()
+    useSong(id)
 
   const handleDragEnd = (result) => {
     if (!result.destination) return
