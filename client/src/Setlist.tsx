@@ -5,7 +5,7 @@ import { useSong } from './useSong'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { SongWithId } from './types'
 
-const Setlist: FC = ({setlistId}) => {
+const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
   const { songs, setSongs, addSong, updateSong, deleteSong, reorderSongs } =
     useSong(setlistId)
 
@@ -30,7 +30,7 @@ const Setlist: FC = ({setlistId}) => {
 
   return (
     <div>
-      <h1>My Setlist</h1>
+      <h2>{setlistTitle} {setlistDate}</h2>
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="table">
           <div className="table-row headers">
