@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 import { Song as SongInterface, SongWithId } from './types.tsx'
 
-export const useSong = (songId) => {
+export const useSong = (setlistId) => {
   const [songs, setSongs] = useState<SongWithId[]>([])
 
   useEffect(()=> {
     fetchSongs()
   }, []);
 
-  const fetchSongs = () => {
-    fetch("/songs").then(
+  const fetchSongs = (setlistId) => {
+    fetch(`/setlist/${setlistId}/songs`).then(
       res => res.json()).then(data => {
         setSongs(data.songs)})
         .catch(err=> console.log("err", err));
@@ -27,7 +27,7 @@ export const useSong = (songId) => {
     fetch('/songs', options)
         .then(res=>{
             if (res.ok) {
-              fetchSongs()
+              fetchSongs(setlistId)
               }
             })
         .catch(err=> console.log("err", err));
@@ -45,7 +45,7 @@ export const useSong = (songId) => {
     fetch(`songs/${song.id}`, options)
         .then(res=>{
             if (res.ok) {
-              fetchSongs()
+              fetchSongs(setlistId)
               }
             })
         .catch(err=> console.log("err", err));
@@ -59,7 +59,7 @@ export const useSong = (songId) => {
     fetch(`songs/${songId}`, options)
         .then(res=> {
             if (res.ok) {
-              fetchSongs()
+              fetchSongs(setlistId)
             }
           })
         .catch(err=> console.log("err", err));
