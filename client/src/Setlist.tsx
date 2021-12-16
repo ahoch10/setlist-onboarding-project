@@ -5,10 +5,11 @@ import { useSong } from './useSong'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { SongWithId } from './types'
 
-const Setlist: FC = ({id}) => {
+const Setlist: FC = ({setlistId}) => {
   const { songs, setSongs, addSong, updateSong, deleteSong, reorderSongs } =
-    useSong(id)
+    useSong(setlistId)
 
+  console.log("setlist id in Setlist", setlistId)
   const handleDragEnd = (result) => {
     if (!result.destination) return
     const updatedSongs: SongWithId[] = Array.from(songs)
@@ -64,7 +65,7 @@ const Setlist: FC = ({id}) => {
               </div>
             )}
           </Droppable>
-          <AddSong setSongs={setSongs} songs={songs} addSong={addSong} />
+          <AddSong setlistId={setlistId} setSongs={setSongs} songs={songs} addSong={addSong} />
         </div>
       </DragDropContext>
     </div>

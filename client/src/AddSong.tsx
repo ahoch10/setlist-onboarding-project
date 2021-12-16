@@ -6,8 +6,9 @@ interface AddSongProps {
   setSongs: Function
 }
 
-const AddSong: FC<AddSongProps> = ({setSongs, songs, addSong}) => {
-  const [song, setSong] = useState<Song>({title: "", key: "", instrumentation: "", notes: ""});
+const AddSong: FC<AddSongProps> = ({setlistId, setSongs, songs, addSong}) => {
+  console.log("setlist Id", setlistId)
+  const [song, setSong] = useState<Song>({title: "", key: "", instrumentation: "", notes: "", setlist_id: setlistId});
 
   const handleChange = (event) => {
     setSong({...song, [event.target.name]: event.target.value});
@@ -16,7 +17,7 @@ const AddSong: FC<AddSongProps> = ({setSongs, songs, addSong}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     addSong(song)
-    setSong({...song, title: "", key: "", instrumentation: "", notes: ""});
+    setSong({...song, title: "", key: "", instrumentation: "", notes: "", setlist_id: setlistId});
   }
 
   return(

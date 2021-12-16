@@ -8,11 +8,11 @@ export const useSong = (setlistId) => {
     fetchSongs()
   }, []);
 
-  const fetchSongs = (setlistId) => {
-    fetch(`/setlist/${setlistId}/songs`).then(
+  const fetchSongs = () => {
+    fetch(`/setlists/${setlistId}/songs`).then(
       res => res.json()).then(data => {
         setSongs(data.songs)})
-        .catch(err=> console.log("err", err));
+        .catch(err=> console.log("err fetching songs", err));
   }
 
   const addSong = (song:SongInterface) => {

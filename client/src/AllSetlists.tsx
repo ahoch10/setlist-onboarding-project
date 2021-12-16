@@ -8,13 +8,15 @@ const AllSetlists: FC = () => {
 
   const { setlists, setSetlists, addSetlist, updateSetlist, deleteSetlist} =
     useSetlist()
-  const [setlistSelected, setSetlistSelected] = useState<number>(null)
+  const [setlistId, setSetlistId] = useState(null)
 
   const selectSetlist = (id) => {
-    setSetlistSelected(id)
+    setSetlistId(id)
   }
 
-  if (!setlistSelected) {
+  console.log(setlistId)
+
+  if (!setlistId) {
   return (
     <div>
       <h1>My Setlists</h1>
@@ -25,10 +27,9 @@ const AllSetlists: FC = () => {
           </div>
                 {setlists.map((setlist, i) => {
                   return (
-                  <div onClick={()=>selectSetlist(setlist.id)}>
+                  <div key={setlist.id} onClick={()=>selectSetlist(setlist.id)}>
                     <SingleSetlist
                       setlist={setlist}
-                      key={i}
                       setlists={setlists}
                       setSetlists={setSetlists}
                       updateSetlist={updateSetlist}
@@ -40,7 +41,7 @@ const AllSetlists: FC = () => {
     </div>
     </div>
   )} else return (
-    <Setlist id={setlistSelected} />
+    <Setlist setlistId={setlistId} />
   )
 }
 
