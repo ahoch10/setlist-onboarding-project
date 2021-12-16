@@ -30,7 +30,7 @@ const AllSetlists: FC = () => {
           </div>
                 {setlists.map((setlist, i) => {
                   return (
-                  <div key={setlist.id} onClick={()=>selectSetlist(setlist.id, setlist.title, setlist.date)}>
+                  <div className="setlists" key={setlist.id} onClick={()=>selectSetlist(setlist.id, setlist.title, setlist.date)}>
                     <SingleSetlist
                       setlist={setlist}
                       setlists={setlists}

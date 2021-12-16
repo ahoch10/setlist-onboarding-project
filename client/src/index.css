@@ -50,3 +50,10 @@ input [type=text] {
   padding: 10px;
 }
 
+.setlists > div:nth-child(even) {
+  background: lightgrey;
+}
+
+.setlists > div:nth-child(odd) {
+  background: lightblue;
+}
