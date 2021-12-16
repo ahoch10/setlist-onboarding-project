@@ -19,8 +19,6 @@ const AllSetlists: FC = () => {
     setSetlistDate(date)
   }
 
-  console.log(setlistId)
-
   if (!setlistId) {
   return (
     <div>

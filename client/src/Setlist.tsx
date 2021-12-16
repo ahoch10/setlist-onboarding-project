@@ -1,15 +1,22 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import AddSong from './AddSong'
 import Song from './Song'
 import { useSong } from './useSong'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { SongWithId } from './types'
+import AllSetlists from './AllSetlists'
+
+type View = "single-setlist" | "all-setlists"
 
 const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
   const { songs, setSongs, addSong, updateSong, deleteSong, reorderSongs } =
     useSong(setlistId)
+  const [view, setView] = useState<View>("single-setlist")
 
-  console.log("setlist id in Setlist", setlistId)
+  const changeView = () => {
+    setView("all-setlists")
+  }
+
   const handleDragEnd = (result) => {
     if (!result.destination) return
     const updatedSongs: SongWithId[] = Array.from(songs)
@@ -28,9 +35,11 @@ const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
     reorderSongs(reorderedSongs)
   }
 
+  if (view === "single-setlist") {
   return (
     <div>
       <h2>{setlistTitle} {setlistDate}</h2>
+      <button onClick={changeView}>Back to all shows</button>
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="table">
           <div className="table-row headers">
@@ -69,7 +78,7 @@ const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
         </div>
       </DragDropContext>
     </div>
-  )
+  )} else return <AllSetlists />
 }
 
 export default Setlist
