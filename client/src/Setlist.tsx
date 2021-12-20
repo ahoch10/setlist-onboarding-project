@@ -38,7 +38,7 @@ const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
   const createPlaylist = () => {
     const playlistData = {
         "playlist_title": `${setlistTitle} ${setlistDate}`,
-        "song_names": songs}
+        "songs": songs}
 
     const options = {
       method: 'POST',
