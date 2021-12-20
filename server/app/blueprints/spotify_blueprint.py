@@ -78,11 +78,7 @@ def all_users():
 
 @spotify.route('/playlist', methods=["POST"])
 def create_playlist():
-    try:
-        token_info = get_token()
-    except:
-        print("user not logged in")
-        redirect("http://localhost:5000/login")
+    token_info = get_token()
 
     sp = spotipy.Spotify(auth=token_info['access_token'])
 
@@ -118,7 +114,7 @@ def create_spotify_oauth():
 def get_token():
     token_info = session.get("TOKEN_INFO", None)
     if not token_info:
-        raise "Exception"
+        raise Exception
 
     now = int(time.time())
     is_expired = token_info['expires_at'] - now < 60
