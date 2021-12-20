@@ -35,11 +35,33 @@ const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
     reorderSongs(reorderedSongs)
   }
 
+  const createPlaylist = () => {
+    const playlistData = {
+        "playlist_title": `${setlistTitle} ${setlistDate}`,
+        "song_names": songs}
+
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(playlistData),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    fetch("/playlist", options)
+      .then(res=> {
+        if (res.ok) {
+          window.alert("playlist created")
+        }
+      })
+  }
+
   if (view === "single-setlist") {
   return (
     <div>
       <h2>{setlistTitle} {setlistDate}</h2>
       <button onClick={changeView}>Back to all shows</button>
+      <button onClick={createPlaylist}>Create Spotify playlist</button>
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="table">
           <div className="table-row headers">
