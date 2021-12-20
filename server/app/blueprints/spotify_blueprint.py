@@ -84,7 +84,19 @@ def create_spotify_oauth():
             scope=scope)
 
 def get_token():
-    pass
+    token_info = session.get("TOKEN_INFO", None)
+    if not token_info:
+        raise "Exception"
+
+    now = int(time.time())
+    is_expired = token_info['expires_at'] - now < 60
+
+    if(is_expired):
+        sp_oauth = create_spotify_oauth()
+        token_info = sp_oauth.refresh_access_token(token_info['refresh_token'])
+    return token_info
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
