@@ -76,6 +76,38 @@ def all_users():
 
     return jsonify({"users": results})
 
+@spotify.route('/playlist', methods=["POST"])
+def create_playlist():
+    try:
+        token_info = get_token()
+    except:
+        print("user not logged in")
+        redirect("http://localhost:5000/login")
+
+    sp = spotipy.Spotify(auth=token_info['access_token'])
+
+    #create the playlist
+    playlist_data = request.get_json()
+    playlist_title = playlist_data.get("playlist_title")
+    user_id = session.get("user_id")
+
+    sp.user_playlist_create(user=user_id, name=playlist_title, public=True, description="")
+
+    #search for each song, find its uri, and append to list of songs
+    song_uris=[]
+    song_names = playlist_data,get("song_names")
+
+    for song in song_names:
+        result = sp.search(q=song)
+        song_uri = result["tracks"]["items"][0]["uri"]
+        song_uris.append(song_uri)
+
+    #modify the playlist with the list of songs
+    search_results = sp.user_playlists(user=user_id)
+    playlist = search_results['items'][0]['id']
+
+    sp.user_playlist_add_tracks(user=user_id, playlist_id=playlist, tracks=song_uris)
+
 def create_spotify_oauth():
     return SpotifyOAuth(
             client_id=SPOTIFY_CLIENT_ID,
