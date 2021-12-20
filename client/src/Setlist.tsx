@@ -52,6 +52,8 @@ const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
       .then(res=> {
         if (res.ok) {
           window.alert("playlist created")
+        } else {
+          window.alert("Error creating playlist, try again")
         }
       })
   }
