@@ -38,10 +38,11 @@ def callback():
     #get user info
     sp = spotipy.Spotify(auth=token_info["access_token"])
     user_info = sp.current_user()
-
+    print(user_info)
     #put user email in session
     session["user_email"] = user_info["email"]
     session["name"] = user_info["display_name"]
+    session["user_id"] = user_info["id"]
 
     #put user info in database
     check_user = User.query.filter_by(email = user_info["email"]).one_or_none()
