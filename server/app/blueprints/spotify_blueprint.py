@@ -27,6 +27,8 @@ def login():
 def callback():
     #create spotify oauth object
     sp_oauth = create_spotify_oauth()
+    #clear session
+    session.clear()
     #get access code from URL
     code = request.args.get('code')
     #get token info from spotify using code
