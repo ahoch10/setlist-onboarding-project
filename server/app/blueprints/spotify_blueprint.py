@@ -85,10 +85,9 @@ def create_playlist():
     #create the playlist
     playlist_data = request.get_json()
     playlist_title = playlist_data.get("playlist_title")
-    user_id = session.get("user_id")
-    print("user_id", user_id)
+
     user_info = sp.current_user()
-    print(user_info["id"])
+    user_id = user_info['id']
 
     sp.user_playlist_create(user=user_id, name=playlist_title, public=True, description="")
 
