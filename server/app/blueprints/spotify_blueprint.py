@@ -14,7 +14,7 @@ load_dotenv()
 
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
 SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
-scope = "playlist-modify-public user-read-email"
+scope = "playlist-modify-public playlist-modify-private user-read-email"
 redirect_uri = "http://localhost:5000/callback"
 
 @spotify.route('/login')
@@ -86,15 +86,18 @@ def create_playlist():
     playlist_data = request.get_json()
     playlist_title = playlist_data.get("playlist_title")
     user_id = session.get("user_id")
+    print("user_id", user_id)
+    user_info = sp.current_user()
+    print(user_info["id"])
 
     sp.user_playlist_create(user=user_id, name=playlist_title, public=True, description="")
 
     #search for each song, find its uri, and append to list of songs
     song_uris=[]
-    song_names = playlist_data,get("song_names")
+    songs = playlist_data.get("songs")
 
-    for song in song_names:
-        result = sp.search(q=song)
+    for song in songs:
+        result = sp.search(q=song["title"])
         song_uri = result["tracks"]["items"][0]["uri"]
         song_uris.append(song_uri)
 
@@ -103,6 +106,8 @@ def create_playlist():
     playlist = search_results['items'][0]['id']
 
     sp.user_playlist_add_tracks(user=user_id, playlist_id=playlist, tracks=song_uris)
+
+    return "Playlist created"
 
 def create_spotify_oauth():
     return SpotifyOAuth(
