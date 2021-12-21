@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #8BBEB2;
+  background-color: #FDE8E9;
 }
 
 code {
@@ -29,22 +29,20 @@ code {
 }
 
 .songs > div:nth-child(even) {
-  background: #384E77;
-  color: white;
+  background: #BC9EC1;
 }
 
 .songs > div:nth-child(odd) {
-  background: #384E77;
-  color: white;
+  background: #BC9EC1;
 }
 
 .table > div:nth-child(1) {
-  background-color: #18314F;
+  background-color: #596475;
   color: white;
 }
 
 form > .table-row {
-  background-color: #18314F;
+  background-color: #596475;
   color: white;
 }
 
@@ -53,12 +51,11 @@ input [type=text] {
 }
 
 .setlists > div {
-  background: #384E77;
-  color: white;
+  background: #BC9EC1;
 }
 
 .header {
-  background:#0D0630;
+  background:#1F2232;
   color: white;
   justify-content: space-between;
   margin-top: 15%;
@@ -71,7 +68,7 @@ input [type=text] {
 }
 
 button {
-  background-color: #E6F9AF;
+  background-color: #E3BAC6;
   box-shadow: none;
   border-radius: 2px;
   border: 0px;
