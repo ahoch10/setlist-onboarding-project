@@ -61,9 +61,11 @@ const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
   if (view === "single-setlist") {
   return (
     <div>
-      <h2>{setlistTitle} {setlistDate}</h2>
-      <button onClick={changeView}>Back to all shows</button>
-      <button onClick={createPlaylist}>Create Spotify playlist</button>
+      <div className="table-row header">
+        <h2>{setlistTitle} {setlistDate}</h2>
+        <button onClick={changeView}>Back to all shows</button>
+        <button onClick={createPlaylist}>Create Spotify playlist</button>
+      </div>
       <DragDropContext onDragEnd={handleDragEnd}>
         <div className="table">
           <div className="table-row headers">

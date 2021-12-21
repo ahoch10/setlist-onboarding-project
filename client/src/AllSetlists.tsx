@@ -22,7 +22,7 @@ const AllSetlists: FC = () => {
   if (!setlistId) {
   return (
     <div>
-      <h1>My Setlists</h1>
+      <div className="header table-row"><h1>My Setlists</h1></div>
         <div className="table">
           <div className="table-row headers">
             <div>Setlist</div>

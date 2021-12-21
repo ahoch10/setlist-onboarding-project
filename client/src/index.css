@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #8BBEB2;
 }
 
 code {
@@ -15,45 +16,63 @@ code {
 .table-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 70px 70px;
-  justify-content: space-around;
+  border: 5px solid darkpink;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 5px;
+  width: 80%;
+  padding: 10px;
 }
 
 .headers {
-font-weight: bold;
+  font-weight: bold;
 }
 
 .songs > div:nth-child(even) {
-  background: pink;
+  background: #384E77;
+  color: white;
 }
 
 .songs > div:nth-child(odd) {
-  background: lightgrey;
+  background: #384E77;
+  color: white;
 }
 
 .table > div:nth-child(1) {
-  background-color: darkgrey;
+  background-color: #18314F;
+  color: white;
 }
 
 form > .table-row {
-  background-color: darkgrey;
+  background-color: #18314F;
+  color: white;
 }
 
 input [type=text] {
   box-sizing: border-box;
 }
 
-.table-row {
-  border: 5px solid darkpink;
-  border-radius: 10px;
+.setlists > div {
+  background: #384E77;
+  color: white;
+}
+
+.header {
+  background:#0D0630;
+  color: white;
+  justify-content: space-between;
+  margin-top: 15%;
+}
+
+.header > button {
+  height: 50%;
+  align-self: center;
   margin: 5px;
-  width: 80%;
-  padding: 10px;
 }
 
-.setlists > div:nth-child(even) {
-  background: lightgrey;
-}
-
-.setlists > div:nth-child(odd) {
-  background: lightblue;
+button {
+  background-color: #E6F9AF;
+  box-shadow: none;
+  border-radius: 2px;
+  border: 0px;
 }
