@@ -24,13 +24,15 @@ const Song = ({
     key: song.key,
     instrumentation: song.instrumentation,
     notes: song.notes,
+    order_index: song.order_index,
+    setlist_id: song.setlist_id
   })
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUpdatedSong({ ...updatedSong, [event.target.name]: event.target.value })
   }
 
-  const handleUpdate = (event) => {
+  const handleUpdate = (event: React.SyntheticEvent) => {
     event.preventDefault()
     updateSong(updatedSong)
     setUpdateSongForm(false)
