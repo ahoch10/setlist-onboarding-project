@@ -83,3 +83,13 @@ button {
   margin-right: 10px;
   cursor: pointer;
 }
+
+.welcome {
+  margin-top: 10%;
+  margin-left: 15%;
+}
+
+.login {
+  margin-left: 15%;
+  color: black;
+}

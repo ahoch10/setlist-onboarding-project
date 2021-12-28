@@ -24,7 +24,7 @@ const App = () => {
   return (
     <div>
       <h1 className="welcome">Welcome</h1>
-      <a href="http://localhost:5000/login">Login with Spotify</a>
+      <a className="login" href="http://localhost:5000/login">Login with Spotify</a>
     </div>
   )
 }
