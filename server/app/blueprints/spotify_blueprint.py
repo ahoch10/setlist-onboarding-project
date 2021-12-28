@@ -23,6 +23,11 @@ def login():
     auth_url = sp_oauth.get_authorize_url()
     return redirect(auth_url)
 
+@spotify.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
+
 @spotify.route('/callback')
 def callback():
     #create spotify oauth object
