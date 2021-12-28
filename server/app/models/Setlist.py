@@ -4,7 +4,7 @@ class Setlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     date = db.Column(db.String(50))
-    songs = db.relationship('Song', backref='setlist', lazy=True)
+    songs = db.relationship('Song', backref='setlist', cascade="all, delete", lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def to_json(self):
