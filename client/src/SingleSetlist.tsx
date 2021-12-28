@@ -15,6 +15,10 @@ const stopPropagationAnd =
     func(event)
   }
 
+const stopPropagation = (event: React.SyntheticEvent) => {
+  event.stopPropagation()
+}
+
 const SingleSetlist = ({
   setlist,
   setlists,
@@ -38,7 +42,6 @@ const SingleSetlist = ({
 
   const handleUpdate = (event: React.SyntheticEvent) => {
     event.stopPropagation()
-    console.log('hello')
     updateSetlist(updatedSetlist)
     setUpdateSetlistForm(false)
   }
@@ -52,6 +55,7 @@ const SingleSetlist = ({
             name="title"
             placeholder={setlist.title}
             onChange={handleChange}
+            onClick={stopPropagation}
           />
         </div>
         <div>
@@ -60,6 +64,7 @@ const SingleSetlist = ({
             name="date"
             placeholder={setlist.date}
             onChange={handleChange}
+            onClick={stopPropagation}
           />
         </div>
         <div>
