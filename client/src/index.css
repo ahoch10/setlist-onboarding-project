@@ -16,7 +16,6 @@ code {
 .table-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 70px 70px;
-  border: 5px solid darkpink;
   border-radius: 10px;
   margin: auto;
   margin-top: 5px;
@@ -42,8 +41,9 @@ form > .table-row {
   color: white;
 }
 
-input [type=text] {
+.table-row input {
   box-sizing: border-box;
+  width: 140px;
 }
 
 .setlists > div {
