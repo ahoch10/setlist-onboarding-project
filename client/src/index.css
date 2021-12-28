@@ -73,3 +73,17 @@ button {
   border-radius: 2px;
   border: 0px;
 }
+
+.navbar {
+  height: 30px;
+  background-color: #596475;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.logout{
+  margin-right: 10px;
+  cursor: pointer;
+}
