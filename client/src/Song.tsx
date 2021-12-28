@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Song as SongInterface, SongWithId } from './types'
+import { SongWithId } from './types'
 import { Draggable } from 'react-beautiful-dnd'
 
 interface SongProps {

@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react'
-import { SetlistInterface, SetlistWithId } from './types'
+import React, { useState } from 'react'
+import { SetlistWithId } from './types'
 
 interface SingleSetlistProps {
   setlist: SetlistWithId

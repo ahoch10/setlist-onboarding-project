@@ -5,7 +5,7 @@ import AddSetlist from './AddSetlist'
 import Setlist from './Setlist'
 
 const AllSetlists = () => {
-  const { setlists, setSetlists, addSetlist, updateSetlist, deleteSetlist } =
+  const { setlists, addSetlist, updateSetlist, deleteSetlist } =
     useSetlist()
   const [setlistId, setSetlistId] = useState<number | null>(null)
   const [setlistTitle, setSetlistTitle] = useState<string>('')
