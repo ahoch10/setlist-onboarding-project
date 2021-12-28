@@ -67,7 +67,7 @@ def delete_setlist(user:User, id: int):
 
 
 # PUT route to update a setlist
-@setlists.route("/setlists/<int:id>")
+@setlists.route("/setlists/<int:id>", methods=["PUT"])
 @requires_login
 def update_setlist(user:User, id: int):
     setlist = Setlist.query.get(id)
