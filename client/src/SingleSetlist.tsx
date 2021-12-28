@@ -4,7 +4,7 @@ import { SetlistInterface, SetlistWithId } from './types'
 interface SingleSetlistProps {
   setlist: SetlistWithId
   setlists: SetlistWithId[]
-  updateSetlist: (updatedSetlist: SetlistInterface) => void
+  updateSetlist: (updatedSetlist: SetlistWithId) => void
   deleteSetlist: (setlistid: number) => void
 }
 
