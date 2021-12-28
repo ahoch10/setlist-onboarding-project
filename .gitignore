@@ -2,3 +2,4 @@
 /server/__pycache__/
 /server/.env
 /server/.cache
+**/__pycache__/
