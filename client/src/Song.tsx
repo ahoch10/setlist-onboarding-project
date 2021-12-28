@@ -5,7 +5,7 @@ import { Draggable } from 'react-beautiful-dnd'
 interface SongProps {
   song: SongWithId
   songs: SongWithId[]
-  updateSong: (song: SongInterface) => void
+  updateSong: (song: SongWithId) => void
   deleteSong: (songId: number) => void
   index: number
 }

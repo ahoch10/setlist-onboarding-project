@@ -98,7 +98,6 @@ const Setlist = ({ setlistId, setlistTitle, setlistDate }: SetlistProps) => {
                         key={i}
                         index={i}
                         songs={songs}
-                        setSongs={setSongs}
                         updateSong={updateSong}
                         deleteSong={deleteSong}
                       />

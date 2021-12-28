@@ -40,7 +40,6 @@ const AllSetlists = () => {
                 <SingleSetlist
                   setlist={setlist}
                   setlists={setlists}
-                  setSetlists={setSetlists}
                   updateSetlist={updateSetlist}
                   deleteSetlist={deleteSetlist}
                 />
@@ -48,8 +47,6 @@ const AllSetlists = () => {
             )
           })}
           <AddSetlist
-            setSetlists={setSetlists}
-            setlists={setlists}
             addSetlist={addSetlist}
           />
         </div>
