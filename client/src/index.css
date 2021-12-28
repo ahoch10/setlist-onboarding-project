@@ -28,11 +28,7 @@ code {
   font-weight: bold;
 }
 
-.songs > div:nth-child(even) {
-  background: #BC9EC1;
-}
-
-.songs > div:nth-child(odd) {
+.songs > div{
   background: #BC9EC1;
 }
 
@@ -58,7 +54,7 @@ input [type=text] {
   background:#1F2232;
   color: white;
   justify-content: space-between;
-  margin-top: 15%;
+  margin-top: 10%;
 }
 
 .header > button {
@@ -83,7 +79,7 @@ button {
   align-items: center;
 }
 
-.logout{
+.logout {
   margin-right: 10px;
   cursor: pointer;
 }
