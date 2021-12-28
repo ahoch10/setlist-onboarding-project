@@ -26,7 +26,7 @@ def login():
 @spotify.route('/logout')
 def logout():
     session.clear()
-    return redirect('/login')
+    return redirect('/')
 
 @spotify.route('/callback')
 def callback():
