@@ -1,9 +1,9 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import AllSetlists from './AllSetlists'
 
 type Status = "loading" | "logged-in" | "not-logged-in"
 
-const App: FC = () => {
+const App = () => {
   const [status, setStatus] = useState<Status>("loading")
 
   useEffect(()=> {

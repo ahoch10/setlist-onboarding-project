@@ -14,12 +14,12 @@ export interface Song {
   key: string,
   instrumentation: string,
   notes: string
+  setlist_id: number
 }
 
 export interface SongWithId extends Song {
   id: number,
   order_index: number,
-  setlist_id: number
 }
 
 export interface SetlistInterface {
@@ -27,7 +27,7 @@ export interface SetlistInterface {
   date: string
 }
 
-export interface SetlistWithId {
+export interface SetlistWithId extends SetlistInterface {
   id: number,
   user_id: number
 }

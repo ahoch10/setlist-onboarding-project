@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { SetlistInterface, SetlistWithId } from './types.tsx'
+import { SetlistInterface, SetlistWithId } from './types'
 
 export const useSetlist = () => {
   const [setlists, setSetlists] = useState<SetlistWithId[]>([])

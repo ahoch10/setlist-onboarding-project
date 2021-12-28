@@ -6,21 +6,27 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { SongWithId } from './types'
 import AllSetlists from './AllSetlists'
 
-type View = "single-setlist" | "all-setlists"
+type View = 'single-setlist' | 'all-setlists'
 
-const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
+interface SetlistProps {
+  setlistId: number
+  setlistTitle: string
+  setlistDate: string
+}
+
+const Setlist = ({ setlistId, setlistTitle, setlistDate }: SetlistProps) => {
   const { songs, setSongs, addSong, updateSong, deleteSong, reorderSongs } =
     useSong(setlistId)
-  const [view, setView] = useState<View>("single-setlist")
+  const [view, setView] = useState<View>('single-setlist')
 
   const changeView = () => {
-    setView("all-setlists")
+    setView('all-setlists')
   }
 
-  const handleDragEnd = (result) => {
+  const handleDragEnd = (result: any) => {
     if (!result.destination) return
     const updatedSongs: SongWithId[] = Array.from(songs)
-    const [reorderedSong]: SongWithId = updatedSongs.splice(
+    const [reorderedSong]: SongWithId[] = updatedSongs.splice(
       result.source.index,
       1
     )
@@ -37,72 +43,80 @@ const Setlist: FC = ({setlistId, setlistTitle, setlistDate}) => {
 
   const createPlaylist = () => {
     const playlistData = {
-        "playlist_title": `${setlistTitle} ${setlistDate}`,
-        "songs": songs}
+      playlist_title: `${setlistTitle} ${setlistDate}`,
+      songs: songs,
+    }
 
     const options = {
       method: 'POST',
       body: JSON.stringify(playlistData),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     }
 
-    fetch("/playlist", options)
-      .then(res=> {
-        if (res.ok) {
-          window.alert("playlist created")
-        } else {
-          window.alert("Error creating playlist, try again")
-        }
-      })
+    fetch('/playlist', options).then((res) => {
+      if (res.ok) {
+        window.alert('playlist created')
+      } else {
+        window.alert('Error creating playlist, try again')
+      }
+    })
   }
 
-  if (view === "single-setlist") {
-  return (
-    <div>
-      <h2>{setlistTitle} {setlistDate}</h2>
-      <button onClick={changeView}>Back to all shows</button>
-      <button onClick={createPlaylist}>Create Spotify playlist</button>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="table">
-          <div className="table-row headers">
-            <div>Song</div>
-            <div>Key</div>
-            <div>Instrumentation</div>
-            <div>Notes</div>
-            <div></div>
-            <div></div>
-          </div>
-          <Droppable droppableId="songs">
-            {(provided) => (
-              <div
-                className="songs"
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {songs.map((song, i) => {
-                  return (
-                    <Song
-                      song={song}
-                      key={i}
-                      index={i}
-                      songs={songs}
-                      setSongs={setSongs}
-                      updateSong={updateSong}
-                      deleteSong={deleteSong}
-                    />
-                  )
-                })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-          <AddSong setlistId={setlistId} setSongs={setSongs} songs={songs} addSong={addSong} />
+  if (view === 'single-setlist') {
+    return (
+      <div>
+        <div className="table-row header">
+          <h2>
+            {setlistTitle} {setlistDate}
+          </h2>
+          <button onClick={changeView}>Back to all shows</button>
+          <button onClick={createPlaylist}>Create Spotify playlist</button>
         </div>
-      </DragDropContext>
-    </div>
-  )} else return <AllSetlists />
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <div className="table">
+            <div className="table-row headers">
+              <div>Song</div>
+              <div>Key</div>
+              <div>Instrumentation</div>
+              <div>Notes</div>
+              <div></div>
+              <div></div>
+            </div>
+            <Droppable droppableId="songs">
+              {(provided) => (
+                <div
+                  className="songs"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {songs.map((song, i) => {
+                    return (
+                      <Song
+                        song={song}
+                        key={i}
+                        index={i}
+                        songs={songs}
+                        setSongs={setSongs}
+                        updateSong={updateSong}
+                        deleteSong={deleteSong}
+                      />
+                    )
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+            <AddSong
+              setlistId={setlistId}
+              addSong={addSong}
+            />
+          </div>
+        </DragDropContext>
+      </div>
+    )
+  } else return <AllSetlists />
 }
 
 export default Setlist
