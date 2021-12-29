@@ -11,3 +11,17 @@ start-db:
 .PHONY: stop-db
 stop-db:
 	docker stop $(DB_CONTAINER_NAME)
+
+.PHONY: build-api
+build-api:
+	docker build -t setlist-server ./server
+
+.PHONY: run-api
+run-api:
+	docker container run \
+	--name setlist-server \
+	-e FLASK_APP=run.py \
+	-p 5000:5000 \
+	-v $(PWD)/server:/home/anat/src \
+        -v /home/anat/src/.venv \
+        setlist-server
