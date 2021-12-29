@@ -23,7 +23,7 @@ const App = () => {
   if (status === 'logged-in') return <AllSetlists />
   return (
     <div>
-      <h1 className="welcome">Welcome</h1>
+      <h1 className="welcome">Welcome to My Setlists</h1>
       <a className="login" href="http://localhost:5000/login">Login with Spotify</a>
     </div>
   )
