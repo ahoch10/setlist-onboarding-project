@@ -15,17 +15,17 @@ The project also connects to Spotify's API using Spotipy, a Python SDK for the S
 
 ## Technologies
 
-*Python
-*Poetry
-*Flask
-*PostgreSQL
-*Flask-SQLAlchemy
-*Flask-Migrate
-*React
-*TypeScript
-*CSS
+* Python
+* Poetry
+* Flask
+* PostgreSQL
+* Flask-SQLAlchemy
+* Flask-Migrate
+* React
+* TypeScript
+* CSS
 
 ## Challenges
-*Persisting order of songs after drag-n-drop
-*Connecting to Spotify
+* Persisting order of songs after drag-n-drop
+* Connecting to Spotify
 
