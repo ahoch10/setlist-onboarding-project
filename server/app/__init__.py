@@ -20,7 +20,7 @@ def create_app():
 
     CORS(app, origins=["http://localhost:3000"])
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@localhost:5433/setlist"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:12345@db:5432/setlist"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     app.secret_key = secret_key

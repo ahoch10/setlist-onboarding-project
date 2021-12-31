@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=setlist
+  web:
+    build: ./server
+    command: flask run --host=0.0.0.0 --port=5000
+    volumes:
+      - ./server:/home/anat/src
+      - /home/anat/src/.venv
+    ports:
+      - "5000:5000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=setlist
+      - FLASK_APP=run.py
+      - FLASK_ENV=development
+    depends_on:
+      - db
+
+
