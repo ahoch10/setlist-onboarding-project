@@ -13,7 +13,9 @@ You can also login through Spotify OAuth and export setlists as Spotify playlist
 The overall structure of the project includes a database, an API, and a frontend user interface.
 The project also connects to Spotify's API using Spotipy, a Python SDK for the Spotify API.
 
+* App structure
 ![app-diagram](images/setlist-app-diagram.png)
+* Database schema
 ![schema](images/setlist-app-schema.png)
 
 ## Technologies
