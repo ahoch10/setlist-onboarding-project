@@ -33,4 +33,4 @@ The project also connects to Spotify's API using Spotipy, a Python SDK for the S
 ## Future Improvements
 * More beautiful UI
 * Organize setlists by date
-* Additional Spotify functionality beyond choosing the firt song searched
+* Additional Spotify functionality beyond choosing the first song searched
