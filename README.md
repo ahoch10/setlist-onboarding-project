@@ -21,11 +21,16 @@ The project also connects to Spotify's API using Spotipy, a Python SDK for the S
 * PostgreSQL
 * Flask-SQLAlchemy
 * Flask-Migrate
+* Typescript
 * React
-* TypeScript
+* react-beautiful-dnd
 * CSS
 
 ## Challenges
 * Persisting order of songs after drag-n-drop
 * Connecting to Spotify
 
+## Future Improvements
+* More beautiful UI
+* Organize setlists by date
+* Additional Spotify functionality beyond choosing the firt song searched
